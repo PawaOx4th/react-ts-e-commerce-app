@@ -9,9 +9,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} caseSensitive />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='about' element={<AboutPage />} caseSensitive />
+        <Route path='*' element={<ErrorPage />} />
         {/* /signin */}
         {/* /singup */}
       </Routes>
