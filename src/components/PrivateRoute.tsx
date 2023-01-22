@@ -5,8 +5,8 @@ import { useLocalStorage } from "react-use"
 type PrivateRoutePropsType = {}
 
 function PrivateRoute({}: PrivateRoutePropsType) {
-  const [value] = useLocalStorage("token")
-  return value ? <Outlet /> : <Navigate to={"/signIn"} />
+  const [token] = useLocalStorage<string | undefined>("token")
+  return token ? <Outlet /> : <Navigate to={"/signIn"} />
 }
 
 export default PrivateRoute
