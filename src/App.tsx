@@ -1,5 +1,6 @@
 import Layout from "components/Layout"
 import PrivateRoute from "components/PrivateRoute"
+import clientApi from "config/axiosConfig"
 import AuthenticationProvider from "context/auth"
 import AboutPage from "pages/AboutPage"
 import ErrorPage from "pages/ErrorPage"
@@ -9,6 +10,7 @@ import SignUp from "pages/SignUp"
 import { Route, Routes } from "react-router-dom"
 
 function App() {
+  console.log("🐳 :", clientApi.getUri())
   return (
     <AuthenticationProvider>
       <Routes>
