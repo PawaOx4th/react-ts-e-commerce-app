@@ -1,7 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 
-const ContainerHome = styled.div``
+const ContainerHome = styled.div`
+  width: 100%;
+  min-height: calc(100vh - 68px);
+`
 
 function HomePage() {
   return (

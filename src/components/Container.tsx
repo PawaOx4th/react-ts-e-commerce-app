@@ -7,7 +7,6 @@ const ContainerStyle = styled.div`
 
   @media screen and (min-width: ${(props) => `${props.theme.breakpoints.sm}px`}) {
     width: 540px;
-    background-color: lemonchiffon;
   }
 
   @media screen and (min-width: ${(props) => `${props.theme.breakpoints.md}px`}) {
