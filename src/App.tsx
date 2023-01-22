@@ -10,17 +10,15 @@ import Navbar from "components/Navbar"
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={<Navbar />}>
-          <Route index element={<HomePage />} caseSensitive />
-          <Route path='about' element={<AboutPage />} caseSensitive />
-        </Route>
-        <Route path='signin' element={<SignIn />} caseSensitive />
-        <Route path='signup' element={<SignUp />} caseSensitive />
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path='/' element={<Navbar />}>
+        <Route index element={<HomePage />} caseSensitive />
+        <Route path='about' element={<AboutPage />} caseSensitive />
+      </Route>
+      <Route path='signin' element={<SignIn />} caseSensitive />
+      <Route path='signup' element={<SignUp />} caseSensitive />
+      <Route path='*' element={<ErrorPage />} />
+    </Routes>
   )
 }
 

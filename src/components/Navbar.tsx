@@ -1,12 +1,25 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
+import styled from "styled-components"
 
-type Props = {}
+const ContainerNavbar = styled.nav`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 3rem;
+  background-color: ${(props) => props.theme.primary};
+`
 
-function Navbar({}: Props) {
+type NavbarPropTypes = {}
+
+function Navbar({}: NavbarPropTypes) {
   return (
-    <div>
-      Navbar
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
+      <ContainerNavbar>Navbar</ContainerNavbar>
       <Outlet />
     </div>
   )
