@@ -3,9 +3,9 @@ import { Authentication } from "./authenticateContext"
 import { useLocalStorage } from "react-use"
 import { Navigate, useNavigate } from "react-router-dom"
 
-type Props = {}
+type AuthenticationProviderPropsType = {}
 
-function AuthenticationProvider({ children }: PropsWithChildren<Props>) {
+function AuthenticationProvider({ children }: PropsWithChildren<AuthenticationProviderPropsType>) {
   return (
     <Authentication.Provider
       value={{
