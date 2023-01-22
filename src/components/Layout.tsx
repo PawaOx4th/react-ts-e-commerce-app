@@ -1,5 +1,3 @@
-import { Authentication } from "context/authenticateContext"
-import AuthenticationProvider from "context/AuthenticationProvider"
 import React from "react"
 import { Outlet } from "react-router-dom"
 import styled from "styled-components"

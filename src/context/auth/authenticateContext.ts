@@ -1,6 +1,6 @@
 import { createContext } from "react"
 
-type AuthenticationContext = {
+export type AuthenticationContext = {
   token: string | undefined
 }
 

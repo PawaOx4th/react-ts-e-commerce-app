@@ -1,15 +1,12 @@
-import { useState } from "react"
-import reactLogo from "assets/react.svg"
-import { Routes, Route } from "react-router-dom"
-import HomePage from "pages/HomePage"
+import Layout from "components/Layout"
+import PrivateRoute from "components/PrivateRoute"
+import AuthenticationProvider from "context/auth"
 import AboutPage from "pages/AboutPage"
 import ErrorPage from "pages/ErrorPage"
+import HomePage from "pages/HomePage"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
-import Navbar from "components/Navbar"
-import Layout from "components/Layout"
-import AuthenticationProvider from "context/AuthenticationProvider"
-import PrivateRoute from "components/PrivateRoute"
+import { Route, Routes } from "react-router-dom"
 
 function App() {
   return (
