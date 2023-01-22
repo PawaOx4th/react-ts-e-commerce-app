@@ -1,13 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const ContainerHome = styled.div`
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+const ContainerHome = styled.div``
 
 function HomePage() {
   return (
