@@ -1,4 +1,5 @@
 import FormTemplate from "components/FormTemplate"
+import useUserAuth from "hook/useUserAuth"
 import React, { ComponentProps, useId } from "react"
 import styled from "styled-components"
 
@@ -15,14 +16,17 @@ const WrapperForm = styled.div`
 type Props = {}
 
 function SignUp({}: Props) {
-  const handleSignUp: ComponentProps<typeof FormTemplate>["onSubmit"] = (email, password) => {
-    console.log("🐳 :", email, password)
-  }
+  const { informationForm, onSubmitForm, onHandleChangeInformationForm } = useUserAuth()
   return (
     <WrapperForm>
       <FormTemplate
         title={"SignUp"}
-        onSubmit={(email: string, password: string) => handleSignUp(email, password)}
+        onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
+        email={informationForm.email}
+        password={informationForm.password}
+        onChange={function (value: string, type: "email" | "password"): void {
+          onHandleChangeInformationForm(value, type)
+        }}
       />
     </WrapperForm>
   )

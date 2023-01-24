@@ -1,3 +1,4 @@
+import { InformationFormType } from "hook/useUserAuth"
 import React, { useId, useState } from "react"
 import styled from "styled-components"
 
@@ -36,21 +37,25 @@ const Container = styled.div<ContainerStylePropTypes>`
   padding: 2rem;
   border-radius: 6px;
 `
-type UserAuthenticateType = {
-  email: string
-  password: string
-}
 
 type FormTemplatePropTypes = {
   title: string
+  email: string
+  password: string
+  onChange: (value: string, type: keyof InformationFormType) => void
   onSubmit: (email: string, password: string) => void
 } & ContainerStylePropTypes
 
-function FormTemplate({ title, onSubmit, bgColor }: FormTemplatePropTypes) {
+function FormTemplate({
+  title,
+  onSubmit,
+  bgColor,
+  email,
+  password,
+  onChange,
+}: FormTemplatePropTypes) {
   const emailId = useId()
   const passwordId = useId()
-
-  const [useAuthen, setUseAuthen] = useState<UserAuthenticateType>({ email: "", password: "" })
 
   return (
     <Container bgColor={bgColor}>
@@ -60,7 +65,7 @@ function FormTemplate({ title, onSubmit, bgColor }: FormTemplatePropTypes) {
       <Form
         onSubmit={(e) => {
           e.preventDefault()
-          onSubmit(useAuthen.email, useAuthen.password)
+          onSubmit(email, password)
         }}
       >
         <Label htmlFor={emailId}>
@@ -70,12 +75,9 @@ function FormTemplate({ title, onSubmit, bgColor }: FormTemplatePropTypes) {
             name=''
             id={emailId}
             required
-            value={useAuthen.email}
+            value={email}
             onChange={(e) => {
-              setUseAuthen((prev) => ({
-                ...prev,
-                email: e.target.value,
-              }))
+              onChange(e.target.value, "email")
             }}
           />
         </Label>
@@ -88,12 +90,9 @@ function FormTemplate({ title, onSubmit, bgColor }: FormTemplatePropTypes) {
             id={passwordId}
             minLength={6}
             required
-            value={useAuthen.password}
+            value={password}
             onChange={(e) => {
-              setUseAuthen((prev) => ({
-                ...prev,
-                password: e.target.value,
-              }))
+              onChange(e.target.value, "password")
             }}
           />
         </Label>

@@ -10,7 +10,6 @@ import SignUp from "pages/SignUp"
 import { Route, Routes } from "react-router-dom"
 
 function App() {
-  console.log("🐳 :", clientApi.getUri())
   return (
     <AuthenticationProvider>
       <Routes>
