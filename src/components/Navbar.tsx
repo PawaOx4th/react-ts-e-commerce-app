@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { NavLink, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import { HiShoppingBag } from "react-icons/hi"
 import theme from "style/theme"
+import useAuthenticationContext from "hook/useAuthticationContext"
 
 const ContainerNavbar = styled.nav`
   display: block;
@@ -54,7 +55,7 @@ const ItemLink = styled(NavLink)`
 
 type NavbarPropTypes = {}
 
-const menuList = [
+const fullMenuList = [
   {
     name: "home",
     path: "/",
@@ -72,7 +73,20 @@ const menuList = [
     path: "/signUp",
   },
 ]
+
+const pathForToken = ["/about"]
+
 function Navbar({}: NavbarPropTypes) {
+  const { token } = useAuthenticationContext()
+
+  const menuList = useMemo(() => {
+    if (token) {
+      return fullMenuList.filter((menu) => {
+        return menu.path === "/" ? menu : pathForToken.includes(menu.path) ? menu : null
+      })
+    } else return fullMenuList
+  }, [token])
+
   return (
     <ContainerNavbar>
       <div
@@ -89,18 +103,19 @@ function Navbar({}: NavbarPropTypes) {
         }}
       >
         <Ul>
-          {menuList.map((item) => {
-            return (
-              <Li
-                key={item.name}
-                style={{
-                  listStyle: "none",
-                }}
-              >
-                <ItemLink to={`${item.path}`}>{item.name}</ItemLink>
-              </Li>
-            )
-          })}
+          {menuList &&
+            menuList.map((item) => {
+              return (
+                <Li
+                  key={item.name}
+                  style={{
+                    listStyle: "none",
+                  }}
+                >
+                  <ItemLink to={`${item.path}`}>{item.name}</ItemLink>
+                </Li>
+              )
+            })}
         </Ul>
       </div>
     </ContainerNavbar>

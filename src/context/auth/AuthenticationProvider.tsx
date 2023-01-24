@@ -6,10 +6,11 @@ import { Navigate, useNavigate } from "react-router-dom"
 type AuthenticationProviderPropsType = {}
 
 function AuthenticationProvider({ children }: PropsWithChildren<AuthenticationProviderPropsType>) {
+  const [token] = useLocalStorage<string | undefined>("token")
   return (
     <Authentication.Provider
       value={{
-        token: undefined,
+        token: token,
       }}
     >
       {children}

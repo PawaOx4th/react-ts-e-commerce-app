@@ -1,3 +1,4 @@
+import { useLocalStorage } from "react-use"
 import { useState } from "react"
 
 export type InformationFormType = {
@@ -10,12 +11,14 @@ function useUserAuth() {
     email: "",
     password: "",
   })
+
+  const [, setValue] = useLocalStorage("token")
   function onHandleChangeInformationForm(value: string, type: keyof InformationFormType) {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
   function onSubmitForm(email: string, password: string) {
-    console.log("🐳  :", email, password)
+    setValue(email)
   }
 
   return {
