@@ -1,6 +1,8 @@
 import FormTemplate from "components/FormTemplate"
+import useAuthenticationContext from "hook/useAuthenticationContext"
 import useUserAuth from "hook/useUserAuth"
-import React, { ComponentProps, useId } from "react"
+import React, { ComponentProps, useEffect, useId } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 const WrapperForm = styled.div`
@@ -17,6 +19,15 @@ type Props = {}
 
 function SignIn({}: Props) {
   const { onSubmitForm, informationForm, onHandleChangeInformationForm } = useUserAuth()
+  const { token } = useAuthenticationContext()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) {
+      navigate("/")
+    }
+    return () => {}
+  }, [token])
 
   return (
     <WrapperForm>

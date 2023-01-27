@@ -3,7 +3,8 @@ import { NavLink, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import { HiShoppingBag } from "react-icons/hi"
 import theme from "style/theme"
-import useAuthenticationContext from "hook/useAuthticationContext"
+import useAuthenticationContext from "hook/useAuthenticationContext"
+import useUserAuth from "hook/useUserAuth"
 
 const ContainerNavbar = styled.nav`
   display: block;
@@ -78,6 +79,7 @@ const pathForToken = ["/about"]
 
 function Navbar({}: NavbarPropTypes) {
   const { token } = useAuthenticationContext()
+  const { onSignOut } = useUserAuth()
 
   const menuList = useMemo(() => {
     if (token) {
@@ -116,6 +118,15 @@ function Navbar({}: NavbarPropTypes) {
                 </Li>
               )
             })}
+          {token && (
+            <Li
+              style={{
+                listStyle: "none",
+              }}
+            >
+              <button onClick={() => onSignOut()}>Sign Out</button>
+            </Li>
+          )}
         </Ul>
       </div>
     </ContainerNavbar>
