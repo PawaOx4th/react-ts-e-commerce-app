@@ -1,27 +1,12 @@
 import { InformationFormType } from "hook/useUserAuth"
-import React, { useId, useState } from "react"
+import React, { useId } from "react"
 import styled from "styled-components"
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
+import { Input, Label } from "./atom"
+import clsx from "clsx"
 
 const TitleText = styled.span`
   font-size: 2rem;
   font-weight: 600;
-`
-
-const Input = styled.input`
-  padding: 8px 12px;
-  border-radius: 4px;
-  outline: none;
-  border: 2px solid #164e63;
-`
-
-const Label = styled.label`
-  font-size: 20px;
 `
 
 export type ContainerStylePropTypes = { bgColor?: string }
@@ -62,7 +47,8 @@ function FormTemplate({
       <div>
         <TitleText>{title}</TitleText>
       </div>
-      <Form
+      <form
+        className={clsx("flex", "flex-col", "gap-1")}
         onSubmit={(e) => {
           e.preventDefault()
           onSubmit(email, password)
@@ -98,7 +84,7 @@ function FormTemplate({
         </Label>
 
         <button type='submit'>{title}</button>
-      </Form>
+      </form>
     </Container>
   )
 }
