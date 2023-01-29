@@ -3,6 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -19,10 +20,12 @@
     "paths": {
       "/pages": ["/src/pages/*"],
       "/components": ["/src/components/*"],
-      "/context": ["/src/context/*"]
+      "/context": ["/src/context/*"],
+      "/assets": ["./src/assets/*"]
     }
   },
   "include": ["src"],
+  "exclude": ["./auto-imports.d.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
