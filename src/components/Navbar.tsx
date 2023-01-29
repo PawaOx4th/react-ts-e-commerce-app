@@ -5,54 +5,7 @@ import { HiShoppingBag } from "react-icons/hi"
 import theme from "style/theme"
 import useAuthenticationContext from "hook/useAuthenticationContext"
 import useUserAuth from "hook/useUserAuth"
-
-const ContainerNavbar = styled.nav`
-  display: block;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  min-height: 4rem;
-  background-color: ${(props) => props.theme.color.primary};
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`
-
-const Ul = styled.ul`
-  display: none;
-  @media screen and (min-width: ${(props) => props.theme.breakpoints.sm}px) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 2rem;
-  }
-`
-
-const Li = styled.li`
-  text-transform: capitalize;
-  font-weight: 500;
-  user-select: none;
-
-  transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
-  color: ${(props) => props.theme.color.secondary};
-  /* cursor: pointer; */
-  &:hover {
-    /* background-color: ${(props) => props.theme.color.gray}; */
-    color: ${(props) => props.theme.color.white};
-  }
-`
-
-const ItemLink = styled(NavLink)`
-  text-decoration: none;
-  color: inherit;
-  padding: 0.5rem 1.275rem;
-  &.active {
-    background: ${(props) => props.theme.color.secondary};
-    color: ${(props) => props.theme.color.white};
-    border-radius: 4px;
-  }
-`
+import clsx from "clsx"
 
 type NavbarPropTypes = {}
 
@@ -60,18 +13,22 @@ const fullMenuList = [
   {
     name: "home",
     path: "/",
+    private: false,
   },
   {
     name: "about",
     path: "/about",
+    private: true,
   },
   {
     name: "sign in",
     path: "/signIn",
+    private: false,
   },
   {
     name: "sign up",
     path: "/signUp",
+    private: false,
   },
 ]
 
@@ -83,53 +40,56 @@ function Navbar({}: NavbarPropTypes) {
 
   const menuList = useMemo(() => {
     if (token) {
-      return fullMenuList.filter((menu) => {
-        return menu.path === "/" ? menu : pathForToken.includes(menu.path) ? menu : null
-      })
+      return fullMenuList.filter((item) => !(item.path === "/signIn" || item.path === "/signUp"))
     } else return fullMenuList
   }, [token])
 
   return (
-    <ContainerNavbar>
-      <div
-        style={{
-          flexGrow: "1",
-          flexBasis: "3rem",
-        }}
-      >
+    <div
+      className={clsx(
+        "flex sticky top-0",
+        "w-full min-h-[4rem]",
+        "bg-main-primary",
+        "items-center justify-between flex-wrap py-4 px-8",
+      )}
+    >
+      <div className='flex grow basis-12'>
         <HiShoppingBag color={theme.color.white} size={"2rem"} />
       </div>
-      <div
-        style={{
-          flexGrow: "5",
-        }}
-      >
-        <Ul>
+      <div className='grow-[5rem]'>
+        <ul className={clsx("hidden md:flex", "justify-end gap-8")}>
           {menuList &&
             menuList.map((item) => {
               return (
-                <Li
+                <li
                   key={item.name}
-                  style={{
-                    listStyle: "none",
-                  }}
+                  className={clsx("capitalize font-medium", " select-none transition-all ")}
                 >
-                  <ItemLink to={`${item.path}`}>{item.name}</ItemLink>
-                </Li>
+                  <NavLink
+                    to={`${item.path}`}
+                    className={clsx(
+                      "no-underline text-main-white",
+                      "hover:text-main-gray hover:bg-main-secondary/50 hover:rounded py-2 px-6",
+                      "[&.active]:bg-main-secondary [&.active]:text-main-white [&.active]:rounded",
+                    )}
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
               )
             })}
           {token && (
-            <Li
-              style={{
-                listStyle: "none",
-              }}
+            <li
+              className={clsx(
+                "capitalize font-medium select-none transition-all text-main-gray hover:text-main-white",
+              )}
             >
               <button onClick={() => onSignOut()}>Sign Out</button>
-            </Li>
+            </li>
           )}
-        </Ul>
+        </ul>
       </div>
-    </ContainerNavbar>
+    </div>
   )
 }
 
