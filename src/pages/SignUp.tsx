@@ -1,34 +1,39 @@
+import clsx from "clsx"
 import FormTemplate from "components/FormTemplate"
 import useUserAuth from "hook/useUserAuth"
 import React, { ComponentProps, useId } from "react"
 import styled from "styled-components"
-
-const WrapperForm = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  gap: 1.275rem;
-`
 
 type Props = {}
 
 function SignUp({}: Props) {
   const { informationForm, onSubmitForm, onHandleChangeInformationForm } = useUserAuth()
   return (
-    <WrapperForm>
-      <FormTemplate
-        title={"SignUp"}
-        onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
-        email={informationForm.email}
-        password={informationForm.password}
-        onChange={function (value: string, type: "email" | "password"): void {
-          onHandleChangeInformationForm(value, type)
-        }}
-      />
-    </WrapperForm>
+    <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
+      <div
+        className={clsx(
+          "col-span-full sm:col-span-3 lg:col-span-6",
+          "absolute -z-10 sm:relative sm:z-0",
+          "w-full min-h-screen",
+          "bg-gradient-to-t from-[#b721ff]/50 to-[#21d4fd]/50",
+          "flex items-center justify-center",
+        )}
+      >
+        <div className='bg_grid'></div>
+        {/* <img src={ShoppingBg} alt='' className='aspect-square hidden lg:block' /> */}
+      </div>
+      <div className={clsx("col-span-full sm:col-span-9 lg:col-span-6")}>
+        <FormTemplate
+          buttonText='sign up'
+          onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
+          email={informationForm.email}
+          password={informationForm.password}
+          onChange={(value, type) => {
+            onHandleChangeInformationForm(value, type)
+          }}
+        />
+      </div>
+    </div>
   )
 }
 

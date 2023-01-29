@@ -19,7 +19,8 @@
     "paths": {
       "/pages": ["/src/pages/*"],
       "/components": ["/src/components/*"],
-      "/context": ["/src/context/*"]
+      "/context": ["/src/context/*"],
+      "/assets": ["./src/assets/*"]
     }
   },
   "include": ["src"],

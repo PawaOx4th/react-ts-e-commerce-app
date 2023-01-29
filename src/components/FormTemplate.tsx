@@ -4,20 +4,6 @@ import styled from "styled-components"
 import { Input, Label } from "./atom"
 import clsx from "clsx"
 
-export type ContainerStylePropTypes = { bgColor?: string }
-const Container = styled.div<ContainerStylePropTypes>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: ${(props) => props.bgColor ?? "#f8fafc"};
-  height: 100%;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 6px;
-`
-
 type FormTemplatePropTypes = {
   title?: string
   buttonText?: string
@@ -25,12 +11,11 @@ type FormTemplatePropTypes = {
   password: string
   onChange: (value: string, type: keyof InformationFormType) => void
   onSubmit: (email: string, password: string) => void
-} & ContainerStylePropTypes
+}
 
 function FormTemplate({
   title,
   onSubmit,
-  bgColor,
   email,
   password,
   onChange,
@@ -40,13 +25,19 @@ function FormTemplate({
   const passwordId = useId()
 
   return (
-    <Container bgColor={bgColor}>
-      <div className={clsx("text-left", "w-full sm:w-[90%] md:w-[75%]")}>
-        <h1 className={clsx("font-semibold m-0")}>{title || "Hey, hello 👋"}</h1>
+    <div
+      className={clsx(
+        "flex flex-col justify-center items-center gap-8",
+        "bg-transparent",
+        "h-full w-full p-8 rounded-md",
+      )}
+    >
+      <div className={clsx("text-left", "w-full sm:w-[75%]   lg:w-8/12 xl:w-5/12")}>
+        <h1 className={clsx("font-semibold m-0 text-md")}>{title || "Hey, hello 👋"}</h1>
         <small className='mt-5 block'>Enter the information you entered while sign in.</small>
       </div>
       <form
-        className={clsx("flex", "flex-col", "gap-1", "w-full sm:w-[90%] md:w-[75%]")}
+        className={clsx("flex", "flex-col", "gap-1", "w-full sm:w-[75%]  lg:w-8/12 xl:w-5/12")}
         onSubmit={(e) => {
           e.preventDefault()
           onSubmit(email, password)
@@ -72,6 +63,7 @@ function FormTemplate({
             )}
           />
           <Label
+            aria-label='input-email'
             htmlFor={emailId}
             className={clsx(
               "text_small",
@@ -104,6 +96,7 @@ function FormTemplate({
             )}
           />
           <Label
+            aria-label='input-password'
             htmlFor={passwordId}
             className={clsx(
               "text_small",
@@ -121,7 +114,7 @@ function FormTemplate({
           type='submit'
           className={clsx(
             "mt-7 py-4",
-            "bg-main-primary rounded-md outline-none",
+            "bg-gradient-to-br from-[#22E1FF]  via-[#1D8FE1] to-[#625EB1] rounded-md outline-none",
             "w-full h-auto",
             "hover:bg-main-primary-hover",
             "transition-all",
@@ -132,7 +125,7 @@ function FormTemplate({
           </span>
         </button>
       </form>
-    </Container>
+    </div>
   )
 }
 

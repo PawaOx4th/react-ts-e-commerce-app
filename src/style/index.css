@@ -61,4 +61,17 @@ p {
   .text_small {
     font-size: 0.8rem;
   }
+
+  .bg_grid {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4) 0.1em, transparent 0.1em),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0.1em, transparent 0.1em);
+    /* background-size: 7rem 7rem; */
+
+    @apply bg-[length:3.5rem_3.5rem] lg:bg-[length:7rem_7rem] transition-all;
+  }
 }
