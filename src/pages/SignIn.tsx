@@ -34,6 +34,7 @@ function SignIn({}: SignInPropsType) {
       </div>
       <div className={clsx("col-span-full md:col-span-9 lg:col-span-6")}>
         <FormTemplate
+          buttonText='sign in'
           onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
           email={informationForm.email}
           password={informationForm.password}

@@ -20,6 +20,7 @@ const Container = styled.div<ContainerStylePropTypes>`
 
 type FormTemplatePropTypes = {
   title?: string
+  buttonText?: string
   email: string
   password: string
   onChange: (value: string, type: keyof InformationFormType) => void
@@ -33,6 +34,7 @@ function FormTemplate({
   email,
   password,
   onChange,
+  buttonText,
 }: FormTemplatePropTypes) {
   const emailId = useId()
   const passwordId = useId()
@@ -117,9 +119,17 @@ function FormTemplate({
 
         <button
           type='submit'
-          className={clsx("mt-5 py-3", "bg-main-primary rounded-md outline-none", "w-full h-auto")}
+          className={clsx(
+            "mt-7 py-4",
+            "bg-main-primary rounded-md outline-none",
+            "w-full h-auto",
+            "hover:bg-main-primary-hover",
+            "transition-all",
+          )}
         >
-          <span className={clsx("text-white font-semibold tracking-wider uppercase")}>{title}</span>
+          <span className={clsx("text-white font-semibold tracking-wider uppercase")}>
+            {buttonText || "submit"}
+          </span>
         </button>
       </form>
     </Container>
