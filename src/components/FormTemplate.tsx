@@ -4,11 +4,6 @@ import styled from "styled-components"
 import { Input, Label } from "./atom"
 import clsx from "clsx"
 
-const TitleText = styled.span`
-  font-size: 2rem;
-  font-weight: 600;
-`
-
 export type ContainerStylePropTypes = { bgColor?: string }
 const Container = styled.div<ContainerStylePropTypes>`
   display: flex;
@@ -24,7 +19,7 @@ const Container = styled.div<ContainerStylePropTypes>`
 `
 
 type FormTemplatePropTypes = {
-  title: string
+  title?: string
   email: string
   password: string
   onChange: (value: string, type: keyof InformationFormType) => void
@@ -44,11 +39,12 @@ function FormTemplate({
 
   return (
     <Container bgColor={bgColor}>
-      <div>
-        <TitleText>{title}</TitleText>
+      <div className={clsx("text-left", "w-full sm:w-[90%] md:w-[75%]")}>
+        <h1 className={clsx("font-semibold m-0")}>{title || "Hey, hello 👋"}</h1>
+        <small className='mt-5 block'>Enter the information you entered while sign in.</small>
       </div>
       <form
-        className={clsx("flex", "flex-col", "gap-1", "w-full sm:w-[65%]")}
+        className={clsx("flex", "flex-col", "gap-1", "w-full sm:w-[90%] md:w-[75%]")}
         onSubmit={(e) => {
           e.preventDefault()
           onSubmit(email, password)
@@ -61,6 +57,7 @@ function FormTemplate({
             id={emailId}
             required
             value={email}
+            autoFocus
             placeholder={"Email are Username"}
             onChange={(e) => {
               onChange(e.target.value, "email")
@@ -93,7 +90,7 @@ function FormTemplate({
             id={passwordId}
             required
             value={password}
-            placeholder={"Email are Username"}
+            placeholder={"Password"}
             onChange={(e) => {
               onChange(e.target.value, "password")
             }}
@@ -118,7 +115,12 @@ function FormTemplate({
           </Label>
         </div>
 
-        <button type='submit'>{title}</button>
+        <button
+          type='submit'
+          className={clsx("mt-5 py-3", "bg-main-primary rounded-md outline-none", "w-full h-auto")}
+        >
+          <span className={clsx("text-white font-semibold tracking-wider uppercase")}>{title}</span>
+        </button>
       </form>
     </Container>
   )

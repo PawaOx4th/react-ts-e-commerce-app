@@ -24,17 +24,16 @@ function SignIn({}: SignInPropsType) {
     <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
       <div
         className={clsx(
-          "col-span-full md:col-span-6",
-          "absolute -z-10 md:block",
+          "col-span-full  md:col-span-3 lg:col-span-6",
+          "absolute -z-10 sm:relative sm:z-0",
           "w-full min-h-screen",
           "bg-gray-50",
         )}
       >
         lorem111
       </div>
-      <div className={clsx("col-span-full md:col-span-6")}>
+      <div className={clsx("col-span-full md:col-span-9 lg:col-span-6")}>
         <FormTemplate
-          title={"SignIn"}
           onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
           email={informationForm.email}
           password={informationForm.password}
