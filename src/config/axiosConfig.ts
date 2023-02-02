@@ -1,8 +1,6 @@
 import axios from "axios"
 
-// @todo work
-
-// @todo ABC
+// @todo #1 Implement responsive layout and navigation
 const clientApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
