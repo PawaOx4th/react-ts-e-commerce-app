@@ -2,6 +2,7 @@ import { useLocalStorage } from "react-use"
 import { useState } from "react"
 import { redirect, useNavigate } from "react-router-dom"
 import useAuthenticationContext from "./useAuthenticationContext"
+import { onSignUp } from "api/authentication"
 
 export type InformationFormType = {
   email: string
@@ -21,10 +22,14 @@ function useUserAuth() {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
-  function onSubmitForm(email: string, password: string) {
-    setValue(email)
-    onSetToken(email)
-    navigate(0)
+  async function onSubmitForm(email: string, password: string) {
+    // setValue(email)
+    // onSetToken(email)
+    // navigate(0)
+    await onSignUp({
+      email,
+      password,
+    })
   }
 
   function onSignOut() {

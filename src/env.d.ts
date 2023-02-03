@@ -5,4 +5,5 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: import("config/env").ENV
+  //         ^?
 }
