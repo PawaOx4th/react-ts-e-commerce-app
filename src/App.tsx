@@ -1,12 +1,14 @@
+import axios from "axios"
 import Layout from "components/Layout"
 import PrivateRoute from "components/PrivateRoute"
-import clientApi from "config/axiosConfig"
+import client from "config/axiosConfig"
 import AuthenticationProvider from "context/auth"
 import AboutPage from "pages/AboutPage"
 import ErrorPage from "pages/ErrorPage"
 import HomePage from "pages/HomePage"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
+import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 
 function App() {
