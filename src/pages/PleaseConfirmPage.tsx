@@ -19,9 +19,9 @@ function PleaseConfirmPage({}: Props) {
         <div className='bg_grid' />
       </div>
       <div className={clsx("z-[2]", "w-full min-h-screen", "flex justify-center items-center")}>
-        <div className={clsx("p-6", "bg-main-white rounded-md", "w-[500px]", "text-center")}>
-          <p className={clsx("font-bold text-2xl")}>Great !!!</p>
-          <p>
+        <div className={clsx("p-6 ", "bg-main-white rounded-md", "w-[500px]", "text-center")}>
+          <p className={clsx("font-bold text-2xl ")}>Great !!!</p>
+          <p className='mb-0'>
             Your email address <strong>{searchParams.get("email")}</strong> appears to be valid.
             Please check your inbox for a confirmation email with further instructions. Thank you🤟
             !

@@ -32,7 +32,6 @@ function useUserAuth() {
       email,
       password,
     })
-
     return [data, errorMsg] as const
   }
 
