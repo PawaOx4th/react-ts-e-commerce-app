@@ -33,7 +33,7 @@ function useUserAuth() {
       password,
     })
 
-    return [data, errorMsg]
+    return [data, errorMsg] as const
   }
 
   function onSignOut() {

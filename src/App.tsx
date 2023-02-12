@@ -7,6 +7,7 @@ import GlobalLoadingProvider from "context/loading/GlobalLoadingProvider"
 import AboutPage from "pages/AboutPage"
 import ErrorPage from "pages/ErrorPage"
 import HomePage from "pages/HomePage"
+import PleaseConfirmPage from "pages/PleaseConfirmPage"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
 import { useEffect } from "react"
@@ -25,6 +26,7 @@ function App() {
           </Route>
           <Route path='signIn' element={<SignIn />} caseSensitive />
           <Route path='signUp' element={<SignUp />} caseSensitive />
+          <Route path='please-confirm' element={<PleaseConfirmPage />} caseSensitive />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AuthenticationProvider>

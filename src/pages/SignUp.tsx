@@ -5,6 +5,7 @@ import { GlobalLoadingContext } from "context/loading/globalLoadingContext"
 import { useGlobalLoading } from "hook/useGlobalLoading"
 import useUserAuth from "hook/useUserAuth"
 import React, { ComponentProps, useContext, useId, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 type Props = {}
@@ -12,16 +13,15 @@ type Props = {}
 function SignUp({}: Props) {
   const { informationForm, onSubmitForm, onHandleChangeInformationForm } = useUserAuth()
   const { onUpdateIsOpen } = useGlobalLoading()
-  const [errorMessage, setErrorMessage] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmitForm = async (...props: Parameters<typeof onSubmitForm>) => {
     onUpdateIsOpen()
     const [data, errorMsg] = await onSubmitForm(props[0], props[1])
     onUpdateIsOpen()
 
-    if (errorMsg) {
-      setErrorMessage(errorMsg)
-    }
+    const dummy = data?.user?.email
+    navigate(`/please-confirm?email=${dummy}`)
   }
   return (
     <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
