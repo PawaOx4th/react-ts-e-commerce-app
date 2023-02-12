@@ -1,6 +1,7 @@
-import { AxiosResponse } from "axios"
+import axios, { Axios, AxiosError, AxiosResponse } from "axios"
 import client from "config/axiosConfig"
 import { InformationFormType } from "hook/useUserAuth"
+import { APIResponseErrorType, AxiosReturn } from "types/Api.type"
 import { SignUpResponseType } from "./SignUp.type"
 
 export interface SingUpParamType {
@@ -9,7 +10,10 @@ export interface SingUpParamType {
   password?: string
 }
 
-export async function onSignUp({ email, password }: InformationFormType) {
+export async function onSignUp({
+  email,
+  password,
+}: InformationFormType): AxiosReturn<SignUpResponseType> {
   try {
     const response = await client.post<
       SignUpResponseType,
@@ -21,10 +25,11 @@ export async function onSignUp({ email, password }: InformationFormType) {
       password,
     })
 
-    console.log("🧊 response :", response)
+    return [response.data, null]
   } catch (error) {
-    if (error instanceof Error) {
-      console.log("🔥 error :", error.message)
+    if (axios.isAxiosError<APIResponseErrorType>(error)) {
+      return [null, error.response?.data?.error?.message ?? "Error"]
     }
+    return [null, (error as Error).message]
   }
 }

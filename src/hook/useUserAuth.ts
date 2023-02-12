@@ -9,6 +9,8 @@ export type InformationFormType = {
   password: string
 }
 
+export type AuthType = "signIn" | "signUp"
+
 function useUserAuth() {
   const [informationForm, setInformationForm] = useState<InformationFormType>({
     email: "",
@@ -22,14 +24,16 @@ function useUserAuth() {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
-  async function onSubmitForm(email: string, password: string) {
+  async function onSubmitForm(email: string, password: string, type?: AuthType) {
     // setValue(email)
     // onSetToken(email)
     // navigate(0)
-    await onSignUp({
+    const [data, errorMsg] = await onSignUp({
       email,
       password,
     })
+
+    return [data, errorMsg]
   }
 
   function onSignOut() {
