@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css"
 function App() {
   return (
     <GlobalLoadingProvider>
-      <ToastContainer />
+      <ToastContainer position={"bottom-right"} />
       <AuthenticationProvider>
         <Routes>
           <Route path='/' element={<Layout />}>
