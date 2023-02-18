@@ -32,8 +32,6 @@ const fullMenuList = [
   },
 ]
 
-const pathForToken = ["/about"]
-
 function Navbar({}: NavbarPropTypes) {
   const { token } = useAuthenticationContext()
   const { onSignOut } = useUserAuth()
