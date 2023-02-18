@@ -89,7 +89,7 @@ function Navbar({}: NavbarPropTypes) {
                 )}
                 onClick={() => onSignOut()}
               >
-                <GoSignOut size={"1.2rem"} />
+                <GoSignOut size={"1.5rem"} />
               </button>
             </li>
           )}
