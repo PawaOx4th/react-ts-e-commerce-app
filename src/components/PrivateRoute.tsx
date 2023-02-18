@@ -1,6 +1,5 @@
-import { Authentication } from "context/auth"
 import useAuthenticationContext from "hook/useAuthenticationContext"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Navigate, Outlet, useNavigate } from "react-router-dom"
 
 type PrivateRoutePropsType = {}

@@ -5,32 +5,10 @@ import React, { useMemo } from "react"
 import { GoSignOut } from "react-icons/go"
 import { HiShoppingBag } from "react-icons/hi"
 import { NavLink } from "react-router-dom"
+import { FULL_MENU_LIST } from "src/constraint/FULL_MENU_LIST"
 import theme from "style/theme"
 
 type NavbarPropTypes = {}
-
-const fullMenuList = [
-  {
-    name: "home",
-    path: "/",
-    private: false,
-  },
-  {
-    name: "about",
-    path: "/about",
-    private: true,
-  },
-  {
-    name: "sign in",
-    path: "/sign-in",
-    private: false,
-  },
-  {
-    name: "sign up",
-    path: "/signUp",
-    private: false,
-  },
-]
 
 function Navbar({}: NavbarPropTypes) {
   const { token } = useAuthenticationContext()
@@ -38,8 +16,8 @@ function Navbar({}: NavbarPropTypes) {
 
   const menuList = useMemo(() => {
     if (token) {
-      return fullMenuList.filter((item) => !(item.path === "/sign-in" || item.path === "/signUp"))
-    } else return fullMenuList
+      return FULL_MENU_LIST.filter((item) => !(item.path === "/sign-in" || item.path === "/signUp"))
+    } else return FULL_MENU_LIST
   }, [token])
 
   return (
