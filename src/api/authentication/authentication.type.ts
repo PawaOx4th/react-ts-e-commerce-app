@@ -17,3 +17,9 @@ export type SingInResponseType = {
   jwt?: string
   user?: UserType
 }
+
+export type JwtType = {
+  id: number
+  iat: number
+  exp: number
+}
