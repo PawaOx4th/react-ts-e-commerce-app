@@ -16,6 +16,7 @@ specifiers:
   react-is: '>= 16.8.0'
   react-router-dom: ^6.6.2
   react-spinners: ^0.13.8
+  react-toastify: ^9.1.1
   react-use: ^17.4.0
   styled-components: ^5.3.6
   tailwindcss: ^3.2.4
@@ -36,6 +37,7 @@ dependencies:
   react-is: 16.13.1
   react-router-dom: 6.6.2_biqbaboplfbrettd7655fr4n2y
   react-spinners: 0.13.8_biqbaboplfbrettd7655fr4n2y
+  react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
   react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
   styled-components: 5.3.6_vtcxgy2wlmese7djxl6h7ok674
   vite-plugin-svgr: 2.4.0_vite@4.0.4
@@ -1746,6 +1748,17 @@ packages:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-toastify/9.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-pkFCla1z3ve045qvjEmn2xOJOy4ZciwRXm1oMPULVkELi5aJdHCN/FHnuqXq8IwGDLB7PPk2/J6uP9D8ejuiRw==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      clsx: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false

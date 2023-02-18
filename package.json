@@ -21,6 +21,7 @@
     "react-is": ">= 16.8.0",
     "react-router-dom": "^6.6.2",
     "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.1",
     "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
     "vite-plugin-svgr": "^2.4.0"

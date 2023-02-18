@@ -18,10 +18,13 @@ function SignUp({}: Props) {
   const handleSubmitForm = async (...props: Parameters<typeof onSubmitForm>) => {
     onUpdateIsOpen()
     const [data, errorMsg] = await onSubmitForm(props[0], props[1])
-    onUpdateIsOpen()
+    console.log("🍉 DATA :", data)
+    console.log("🍉 ERROR :", errorMsg)
 
-    const dummy = data?.user?.email
-    navigate(`/please-confirm?email=${dummy}`)
+    // onUpdateIsOpen()
+
+    // const dummy = data?.user?.email
+    // navigate(`/please-confirm?email=${dummy}`)
   }
   return (
     <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
