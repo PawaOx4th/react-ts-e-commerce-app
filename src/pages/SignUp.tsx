@@ -17,7 +17,7 @@ function SignUp({}: Props) {
 
   const handleSubmitForm = async (...props: Parameters<typeof onSubmitForm>) => {
     onUpdateIsOpen()
-    const [data, errorMsg] = await onSubmitForm(props[0], props[1])
+    const [data, errorMsg] = await onSubmitForm(props[0], props[1], "signUp")
 
     if (errorMsg) {
       toast.error(errorMsg, {
@@ -49,7 +49,7 @@ function SignUp({}: Props) {
         <FormTemplate
           buttonText='sign up'
           onSubmit={(email: string, password: string) => {
-            handleSubmitForm(email, password)
+            handleSubmitForm(email, password, "signUp")
           }}
           email={informationForm.email}
           password={informationForm.password}

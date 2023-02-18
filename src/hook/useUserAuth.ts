@@ -2,7 +2,7 @@ import { useLocalStorage } from "react-use"
 import { useState } from "react"
 import { redirect, useNavigate } from "react-router-dom"
 import useAuthenticationContext from "./useAuthenticationContext"
-import { onSignUp } from "api/authentication"
+import { onSignUp, onSignIn } from "api/authentication"
 
 export type InformationFormType = {
   email: string
@@ -24,15 +24,27 @@ function useUserAuth() {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
-  async function onSubmitForm(email: string, password: string, type?: AuthType) {
+  async function onSubmitForm(email: string, password: string, type: AuthType) {
     // setValue(email)
     // onSetToken(email)
     // navigate(0)
-    const [data, errorMsg] = await onSignUp({
-      email,
-      password,
-    })
-    return [data, errorMsg] as const
+    if (type === "signUp") {
+      const [data, errorMsg] = await onSignUp({
+        email,
+        password,
+      })
+      return [data, errorMsg] as const
+    }
+
+    if (type === "signIn") {
+      const [data, errorMsg] = await onSignIn({
+        email,
+        password,
+      })
+      return [data, errorMsg] as const
+    }
+
+    return [null, "Type is not defined"] as const
   }
 
   function onSignOut() {

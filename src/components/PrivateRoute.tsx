@@ -10,10 +10,10 @@ function PrivateRoute({}: PrivateRoutePropsType) {
   const navigate = useNavigate()
   useEffect(() => {
     if (!token) {
-      navigate("/signIn")
+      navigate("/sign-in")
     }
   }, [token])
-  return token ? <Outlet /> : <Navigate to={"/signIn"} />
+  return token ? <Outlet /> : <Navigate to={"/sign-in"} />
 }
 
 export default PrivateRoute

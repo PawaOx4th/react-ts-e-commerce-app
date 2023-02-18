@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import clsx from "clsx"
 import ShoppingBg from "assets/shoppingBackground.svg"
+import { useGlobalLoading } from "hook/useGlobalLoading"
+import { toast } from "react-toastify"
 
 type SignInPropsType = {}
 
@@ -13,6 +15,7 @@ function SignIn({}: SignInPropsType) {
   const { onSubmitForm, informationForm, onHandleChangeInformationForm } = useUserAuth()
   const { token } = useAuthenticationContext()
   const navigate = useNavigate()
+  const { onUpdateIsOpen } = useGlobalLoading()
 
   useEffect(() => {
     if (token) {
@@ -20,6 +23,20 @@ function SignIn({}: SignInPropsType) {
     }
     return () => {}
   }, [token])
+
+  const handleSignIn = async (...params: Parameters<typeof onSubmitForm>) => {
+    onUpdateIsOpen()
+    const [data, errorMsg] = await onSubmitForm(params[0], params[1], "signIn")
+
+    if (errorMsg) {
+      toast.error(errorMsg)
+    }
+    if (data) {
+      toast.success("Sign in successfully")
+      navigate("/")
+    }
+    onUpdateIsOpen()
+  }
 
   return (
     <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
@@ -38,7 +55,7 @@ function SignIn({}: SignInPropsType) {
       <div className={clsx("col-span-full sm:col-span-9 lg:col-span-6")}>
         <FormTemplate
           buttonText='sign in'
-          onSubmit={(email: string, password: string) => onSubmitForm(email, password)}
+          onSubmit={(email: string, password: string) => handleSignIn(email, password, "signIn")}
           email={informationForm.email}
           password={informationForm.password}
           onChange={(value, type) => {

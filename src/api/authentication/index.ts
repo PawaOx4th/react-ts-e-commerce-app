@@ -33,3 +33,24 @@ export async function onSignUp({
     return [null, (error as Error).message]
   }
 }
+
+export async function onSignIn({
+  email,
+  password,
+}: InformationFormType): AxiosReturn<SignUpResponseType> {
+  try {
+    const response = await client.post<SignUpResponseType>("/auth/local", {
+      identifier: email,
+      password,
+    })
+
+    console.log("🍉 RESPONSE :", response)
+
+    return [response.data, null]
+  } catch (error) {
+    if (axios.isAxiosError<APIResponseErrorType>(error)) {
+      return [null, error.response?.data?.error?.message ?? "Error"]
+    }
+    return [null, (error as Error).message]
+  }
+}

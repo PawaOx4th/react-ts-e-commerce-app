@@ -22,7 +22,7 @@ const fullMenuList = [
   },
   {
     name: "sign in",
-    path: "/signIn",
+    path: "/sign-in",
     private: false,
   },
   {
@@ -40,7 +40,7 @@ function Navbar({}: NavbarPropTypes) {
 
   const menuList = useMemo(() => {
     if (token) {
-      return fullMenuList.filter((item) => !(item.path === "/signIn" || item.path === "/signUp"))
+      return fullMenuList.filter((item) => !(item.path === "/sign-in" || item.path === "/signUp"))
     } else return fullMenuList
   }, [token])
 

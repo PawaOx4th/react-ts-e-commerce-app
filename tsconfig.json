@@ -25,7 +25,8 @@
       "api/*": ["./src/api/*"],
       "hook/*": ["./src/hook/*"],
       "style/*": ["./src/style/*"],
-      "config/*": ["./src/config/*"]
+      "config/*": ["./src/config/*"],
+      "types/*": ["./src/types/*"]
     }
   },
   "include": ["src"],
