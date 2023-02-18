@@ -1,11 +1,11 @@
-import React, { useMemo } from "react"
-import { NavLink, Outlet } from "react-router-dom"
-import styled from "styled-components"
-import { HiShoppingBag } from "react-icons/hi"
-import theme from "style/theme"
+import clsx from "clsx"
 import useAuthenticationContext from "hook/useAuthenticationContext"
 import useUserAuth from "hook/useUserAuth"
-import clsx from "clsx"
+import React, { useMemo } from "react"
+import { GoSignOut } from "react-icons/go"
+import { HiShoppingBag } from "react-icons/hi"
+import { NavLink } from "react-router-dom"
+import theme from "style/theme"
 
 type NavbarPropTypes = {}
 
@@ -57,7 +57,7 @@ function Navbar({}: NavbarPropTypes) {
         <HiShoppingBag color={theme.color.white} size={"2rem"} />
       </div>
       <div className='grow-[5rem]'>
-        <ul className={clsx("hidden md:flex", "justify-end gap-8")}>
+        <ul className={clsx("hidden md:flex", "justify-end items-center gap-8")}>
           {menuList &&
             menuList.map((item) => {
               return (
@@ -80,11 +80,17 @@ function Navbar({}: NavbarPropTypes) {
             })}
           {token && (
             <li
-              className={clsx(
-                "capitalize font-medium select-none transition-all text-main-gray hover:text-main-white",
-              )}
+              className={clsx("capitalize font-medium select-none transition-all text-main-white ")}
             >
-              <button onClick={() => onSignOut()}>Sign Out</button>
+              <button
+                className={clsx(
+                  "flex items-center gap-2",
+                  "hover:text-main-gray hover:bg-main-secondary/50 hover:rounded px-6 py-2 ",
+                )}
+                onClick={() => onSignOut()}
+              >
+                <GoSignOut size={"1.2rem"} />
+              </button>
             </li>
           )}
         </ul>

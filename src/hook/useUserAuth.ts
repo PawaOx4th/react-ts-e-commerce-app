@@ -41,6 +41,10 @@ function useUserAuth() {
         email,
         password,
       })
+
+      if (data?.jwt) {
+        onSetToken(data.jwt)
+      }
       return [data, errorMsg] as const
     }
 
