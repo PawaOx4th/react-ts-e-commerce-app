@@ -6,7 +6,7 @@ import { useGlobalLoading } from "hook/useGlobalLoading"
 import useUserAuth from "hook/useUserAuth"
 import React, { ComponentProps, useContext, useId, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import styled from "styled-components"
+import { ToastContainer, toast } from "react-toastify"
 
 type Props = {}
 
@@ -18,13 +18,19 @@ function SignUp({}: Props) {
   const handleSubmitForm = async (...props: Parameters<typeof onSubmitForm>) => {
     onUpdateIsOpen()
     const [data, errorMsg] = await onSubmitForm(props[0], props[1])
-    console.log("🍉 DATA :", data)
-    console.log("🍉 ERROR :", errorMsg)
 
-    // onUpdateIsOpen()
+    if (errorMsg) {
+      toast.error(errorMsg, {
+        autoClose: false,
+      })
+      return
+    }
 
-    // const dummy = data?.user?.email
-    // navigate(`/please-confirm?email=${dummy}`)
+    if (data) {
+      const dummy = data?.user?.email
+      navigate(`/please-confirm?email=${dummy}`)
+    }
+    onUpdateIsOpen()
   }
   return (
     <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>

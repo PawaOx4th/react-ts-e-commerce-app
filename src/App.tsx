@@ -1,7 +1,6 @@
-import axios from "axios"
+import React from "react"
 import Layout from "components/Layout"
 import PrivateRoute from "components/PrivateRoute"
-import client from "config/axiosConfig"
 import AuthenticationProvider from "context/auth"
 import GlobalLoadingProvider from "context/loading/GlobalLoadingProvider"
 import AboutPage from "pages/AboutPage"
@@ -10,12 +9,14 @@ import HomePage from "pages/HomePage"
 import PleaseConfirmPage from "pages/PleaseConfirmPage"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
-import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
     <GlobalLoadingProvider>
+      <ToastContainer />
       <AuthenticationProvider>
         <Routes>
           <Route path='/' element={<Layout />}>
