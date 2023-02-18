@@ -1,11 +1,12 @@
 import clsx from "clsx"
 import React from "react"
-import { useParams, useSearchParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 
 type Props = {}
 
 function PleaseConfirmPage({}: Props) {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   return (
     <div className='relative'>
@@ -26,6 +27,21 @@ function PleaseConfirmPage({}: Props) {
             Please check your inbox for a confirmation email with further instructions. Thank you🤟
             !
           </p>
+          <button
+            className={clsx(
+              "font-bold",
+              "bg-main-primary px-3 py-2 rounded-md",
+              "hover:text-white   hover:ring-2 hover:ring-main-secondary ring-offset-1",
+              "active:scale-95",
+              "transition-all",
+              "mt-5",
+            )}
+            onClick={() => {
+              navigate("/sign-in")
+            }}
+          >
+            Go to SignIn
+          </button>
         </div>
       </div>
     </div>

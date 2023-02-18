@@ -25,8 +25,8 @@ function App() {
               <Route path='about' element={<AboutPage />} caseSensitive />
             </Route>
           </Route>
-          <Route path='signIn' element={<SignIn />} caseSensitive />
-          <Route path='signUp' element={<SignUp />} caseSensitive />
+          <Route path='sign-in' element={<SignIn />} caseSensitive />
+          <Route path='sign-up' element={<SignUp />} caseSensitive />
           <Route path='please-confirm' element={<PleaseConfirmPage />} caseSensitive />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
