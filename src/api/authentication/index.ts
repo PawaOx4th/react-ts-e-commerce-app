@@ -2,7 +2,7 @@ import axios, { Axios, AxiosError, AxiosResponse } from "axios"
 import client from "config/axiosConfig"
 import { InformationFormType } from "hook/useUserAuth"
 import { APIResponseErrorType, AxiosReturn } from "types/Api.type"
-import { SignUpResponseType } from "./SignUp.type"
+import { SignUpResponseType, SingInResponseType } from "./authentication.type"
 
 export interface SingUpParamType {
   username?: string
@@ -37,14 +37,12 @@ export async function onSignUp({
 export async function onSignIn({
   email,
   password,
-}: InformationFormType): AxiosReturn<SignUpResponseType> {
+}: InformationFormType): AxiosReturn<SingInResponseType> {
   try {
-    const response = await client.post<SignUpResponseType>("/auth/local", {
+    const response = await client.post<SingInResponseType>("/auth/local", {
       identifier: email,
       password,
     })
-
-    console.log("🍉 RESPONSE :", response)
 
     return [response.data, null]
   } catch (error) {

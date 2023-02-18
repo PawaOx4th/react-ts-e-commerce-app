@@ -1,7 +1,3 @@
-export interface SignUpResponseType {
-  user?: UserType
-}
-
 export interface UserType {
   id?: number
   username?: string
@@ -11,4 +7,13 @@ export interface UserType {
   blocked?: boolean
   createdAt?: string
   updatedAt?: string
+}
+
+export interface SignUpResponseType {
+  user?: UserType
+}
+
+export type SingInResponseType = {
+  jwt?: string
+  user?: UserType
 }
