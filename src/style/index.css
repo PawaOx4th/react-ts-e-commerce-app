@@ -27,13 +27,13 @@ p {
 }
 
 @layer base {
-  h1,
+  /* h1,
   h2,
   h3,
   h4,
   h5 {
-    @apply my-12 mx-[1.38rem] font-normal leading-[1.3rem];
-  }
+    /* @apply; */
+  /* }  */
 
   h1 {
     @apply text-[3.052rem];

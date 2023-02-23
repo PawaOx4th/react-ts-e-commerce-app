@@ -3,7 +3,7 @@ import FormTemplate from "components/FormTemplate"
 import { useGlobalLoading } from "hook/useGlobalLoading"
 import useUserAuth from "hook/useUserAuth"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import useAuthenticationStore from "src/store/authentication/authentication.store"
 
