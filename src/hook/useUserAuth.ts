@@ -3,6 +3,7 @@ import { useState } from "react"
 import { redirect, useNavigate } from "react-router-dom"
 import useAuthenticationContext from "./useAuthenticationContext"
 import { onSignUp, onSignIn } from "api/authentication"
+import useAuthenticationStore from "src/store/authentication/authentication.store"
 
 export type InformationFormType = {
   email: string
@@ -24,6 +25,8 @@ function useUserAuth() {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
+  const { onSetJwt, onRemoveJwt } = useAuthenticationStore()
+
   async function onSubmitForm(email: string, password: string, type: AuthType) {
     // setValue(email)
     // onSetToken(email)
@@ -44,6 +47,7 @@ function useUserAuth() {
 
       if (data?.jwt) {
         onSetToken(data.jwt)
+        onSetJwt(data.jwt)
       }
       return [data, errorMsg] as const
     }
@@ -52,8 +56,11 @@ function useUserAuth() {
   }
 
   function onSignOut() {
-    onDeleteToken()
-    navigate(0)
+    const status = onRemoveJwt()
+    if (status) {
+      onDeleteToken()
+      navigate("/")
+    }
   }
 
   return {
