@@ -25,7 +25,10 @@ const useAuthenticationStore = create<UseAuthenticationStoreType>()(
         name: "secret",
       },
     ),
-    { store: "useAuthenticationStore" },
+    {
+      store: "useAuthenticationStore",
+      enabled: import.meta.env.MODE === "development" ? true : false,
+    },
   ),
 )
 
