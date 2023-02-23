@@ -1,8 +1,7 @@
-import { useLocalStorage } from "react-use"
+import { onSignIn, onSignUp } from "api/authentication"
 import { useState } from "react"
-import { redirect, useNavigate } from "react-router-dom"
-import useAuthenticationContext from "./useAuthenticationContext"
-import { onSignUp, onSignIn } from "api/authentication"
+import { useNavigate } from "react-router-dom"
+import { useLocalStorage } from "react-use"
 import useAuthenticationStore from "src/store/authentication/authentication.store"
 
 export type InformationFormType = {
@@ -18,7 +17,6 @@ function useUserAuth() {
     password: "",
   })
   const navigate = useNavigate()
-  const { onSetToken, onDeleteToken } = useAuthenticationContext()
 
   const [, setValue] = useLocalStorage("token")
   function onHandleChangeInformationForm(value: string, type: keyof InformationFormType) {
@@ -46,7 +44,6 @@ function useUserAuth() {
       })
 
       if (data?.jwt) {
-        onSetToken(data.jwt)
         onSetJwt(data.jwt)
       }
       return [data, errorMsg] as const
@@ -58,7 +55,6 @@ function useUserAuth() {
   function onSignOut() {
     const status = onRemoveJwt()
     if (status) {
-      onDeleteToken()
       navigate("/")
     }
   }

@@ -1,28 +1,26 @@
-import FormTemplate from "components/FormTemplate"
-import useAuthenticationContext from "hook/useAuthenticationContext"
-import useUserAuth from "hook/useUserAuth"
-import React, { ComponentProps, useEffect, useId } from "react"
-import { useNavigate } from "react-router-dom"
-import styled from "styled-components"
 import clsx from "clsx"
-import ShoppingBg from "assets/shoppingBackground.svg"
+import FormTemplate from "components/FormTemplate"
 import { useGlobalLoading } from "hook/useGlobalLoading"
+import useUserAuth from "hook/useUserAuth"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import useAuthenticationStore from "src/store/authentication/authentication.store"
 
 type SignInPropsType = {}
 
 function SignIn({}: SignInPropsType) {
   const { onSubmitForm, informationForm, onHandleChangeInformationForm } = useUserAuth()
-  const { token } = useAuthenticationContext()
+  const jwtToken = useAuthenticationStore((state) => state.jwt)
   const navigate = useNavigate()
   const { onUpdateIsOpen } = useGlobalLoading()
 
   useEffect(() => {
-    if (token) {
+    if (jwtToken) {
       navigate("/")
     }
     return () => {}
-  }, [token])
+  }, [jwtToken])
 
   const handleSignIn = async (...params: Parameters<typeof onSubmitForm>) => {
     onUpdateIsOpen()

@@ -1,7 +1,6 @@
-import React from "react"
 import Layout from "components/Layout"
 import PrivateRoute from "components/PrivateRoute"
-import AuthenticationProvider from "context/auth"
+
 import GlobalLoadingProvider from "context/loading/GlobalLoadingProvider"
 import AboutPage from "pages/AboutPage"
 import ErrorPage from "pages/ErrorPage"
@@ -17,20 +16,18 @@ function App() {
   return (
     <GlobalLoadingProvider>
       <ToastContainer position={"bottom-right"} />
-      <AuthenticationProvider>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<HomePage />} caseSensitive />
-            <Route element={<PrivateRoute />}>
-              <Route path='about' element={<AboutPage />} caseSensitive />
-            </Route>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} caseSensitive />
+          <Route element={<PrivateRoute />}>
+            <Route path='about' element={<AboutPage />} caseSensitive />
           </Route>
-          <Route path='sign-in' element={<SignIn />} caseSensitive />
-          <Route path='sign-up' element={<SignUp />} caseSensitive />
-          <Route path='please-confirm' element={<PleaseConfirmPage />} caseSensitive />
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
-      </AuthenticationProvider>
+        </Route>
+        <Route path='sign-in' element={<SignIn />} caseSensitive />
+        <Route path='sign-up' element={<SignUp />} caseSensitive />
+        <Route path='please-confirm' element={<PleaseConfirmPage />} caseSensitive />
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
     </GlobalLoadingProvider>
   )
 }

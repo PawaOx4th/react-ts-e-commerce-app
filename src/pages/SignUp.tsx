@@ -1,12 +1,9 @@
 import clsx from "clsx"
 import FormTemplate from "components/FormTemplate"
-import { GlobalLoading } from "components/molecules/GlobalLoading"
-import { GlobalLoadingContext } from "context/loading/globalLoadingContext"
 import { useGlobalLoading } from "hook/useGlobalLoading"
 import useUserAuth from "hook/useUserAuth"
-import React, { ComponentProps, useContext, useId, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 
 type Props = {}
 

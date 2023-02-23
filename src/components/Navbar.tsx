@@ -1,26 +1,26 @@
 import clsx from "clsx"
-import useAuthenticationContext from "hook/useAuthenticationContext"
 import useUserAuth from "hook/useUserAuth"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { GoSignOut } from "react-icons/go"
 import { HiShoppingBag } from "react-icons/hi"
 import { NavLink } from "react-router-dom"
 import { FULL_MENU_LIST } from "src/constraint/FULL_MENU_LIST"
+import useAuthenticationStore from "src/store/authentication/authentication.store"
 import theme from "style/theme"
 
 type NavbarPropTypes = {}
 
 function Navbar({}: NavbarPropTypes) {
-  const { token } = useAuthenticationContext()
+  const jwtToken = useAuthenticationStore((state) => state.jwt)
   const { onSignOut } = useUserAuth()
 
   const menuList = useMemo(() => {
-    if (token) {
+    if (jwtToken) {
       return FULL_MENU_LIST.filter(
         (item) => !(item.path === "/sign-in" || item.path === "/sign-up"),
       )
     } else return FULL_MENU_LIST
-  }, [token])
+  }, [jwtToken])
 
   return (
     <div
@@ -56,7 +56,7 @@ function Navbar({}: NavbarPropTypes) {
                 </li>
               )
             })}
-          {token && (
+          {jwtToken && (
             <li
               className={clsx("capitalize font-medium select-none transition-all text-main-white ")}
             >
