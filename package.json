@@ -26,7 +26,8 @@
     "react-toastify": "^9.1.1",
     "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
-    "vite-plugin-svgr": "^2.4.0"
+    "vite-plugin-svgr": "^2.4.0",
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",

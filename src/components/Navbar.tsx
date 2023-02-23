@@ -16,7 +16,9 @@ function Navbar({}: NavbarPropTypes) {
 
   const menuList = useMemo(() => {
     if (token) {
-      return FULL_MENU_LIST.filter((item) => !(item.path === "/sign-in" || item.path === "/signUp"))
+      return FULL_MENU_LIST.filter(
+        (item) => !(item.path === "/sign-in" || item.path === "/sign-up"),
+      )
     } else return FULL_MENU_LIST
   }, [token])
 
