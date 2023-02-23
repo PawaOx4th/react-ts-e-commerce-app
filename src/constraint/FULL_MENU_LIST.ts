@@ -22,7 +22,7 @@ export const FULL_MENU_LIST: Readonly<FullMenuListType[]> = [
   },
   {
     name: "sign up",
-    path: "/signUp",
+    path: "/sign-up",
     private: false,
   },
 ]
