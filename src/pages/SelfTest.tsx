@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -13,7 +14,13 @@ function SelfTest({}: Props) {
     }
   }, [])
 
-  return <div>SelfTest</div>
+  return (
+    <div
+      className={clsx("w-3/5 mx-auto  py-20 h-auto my-8", "border-2 border-pink-600 border-dashed")}
+    >
+      SelfTest
+    </div>
+  )
 }
 
 export default SelfTest
