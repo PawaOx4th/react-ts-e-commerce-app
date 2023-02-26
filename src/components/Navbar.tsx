@@ -35,13 +35,18 @@ function Navbar({}: NavbarPropTypes) {
         <HiShoppingBag color={theme.color.white} size={"2rem"} />
       </div>
       <div className='grow-[5rem]'>
-        <ul className={clsx("hidden md:flex", "justify-end items-center gap-8")}>
+        <ul
+          className={clsx("hidden md:flex", "justify-end items-center gap-8")}
+        >
           {menuList &&
             menuList.map((item) => {
               return (
                 <li
                   key={item.name}
-                  className={clsx("capitalize font-medium", " select-none transition-all ")}
+                  className={clsx(
+                    "capitalize font-medium",
+                    " select-none transition-all ",
+                  )}
                 >
                   <NavLink
                     to={`${item.path}`}
@@ -58,7 +63,9 @@ function Navbar({}: NavbarPropTypes) {
             })}
           {jwtToken && (
             <li
-              className={clsx("capitalize font-medium select-none transition-all text-main-white ")}
+              className={clsx(
+                "capitalize font-medium select-none transition-all text-main-white ",
+              )}
             >
               <button
                 className={clsx(

@@ -3,6 +3,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from "react-use"
 import useAuthenticationStore from "src/store/authentication/authentication.store"
+import useProfileStore from "src/store/profile/profile.store"
+import { shallow } from "zustand/shallow"
 
 export type InformationFormType = {
   email: string
@@ -19,16 +21,23 @@ function useUserAuth() {
   const navigate = useNavigate()
 
   const [, setValue] = useLocalStorage("token")
-  function onHandleChangeInformationForm(value: string, type: keyof InformationFormType) {
+  function onHandleChangeInformationForm(
+    value: string,
+    type: keyof InformationFormType,
+  ) {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
   const { onSetJwt, onRemoveJwt } = useAuthenticationStore()
+  const { onUpdateUser, onRemoveUser } = useProfileStore(
+    (state) => ({
+      onUpdateUser: state.onUpdateUser,
+      onRemoveUser: state.onRemoveUser,
+    }),
+    shallow,
+  )
 
   async function onSubmitForm(email: string, password: string, type: AuthType) {
-    // setValue(email)
-    // onSetToken(email)
-    // navigate(0)
     if (type === "signUp") {
       const [data, errorMsg] = await onSignUp({
         email,
@@ -45,6 +54,7 @@ function useUserAuth() {
 
       if (data?.jwt) {
         onSetJwt(data.jwt)
+        data.user && onUpdateUser(data.user)
       }
       return [data, errorMsg] as const
     }
@@ -52,8 +62,9 @@ function useUserAuth() {
     return [null, "Type is not defined"] as const
   }
 
-  function onSignOut() {
+  const onSignOut = () => {
     const status = onRemoveJwt()
+    onRemoveUser()
     if (status) {
       navigate("/")
     }

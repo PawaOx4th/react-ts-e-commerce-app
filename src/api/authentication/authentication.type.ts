@@ -15,7 +15,7 @@ export interface SignUpResponseType {
 
 export type SingInResponseType = {
   jwt?: string
-  user?: UserType
+  user?: Required<UserType>
 }
 
 export type JwtType = {

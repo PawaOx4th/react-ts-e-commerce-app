@@ -1,3 +1,4 @@
+import { definedStore } from "src/helpers"
 import { create } from "zustand"
 import { devtools, persist } from "zustand/middleware"
 
@@ -25,10 +26,7 @@ const useAuthenticationStore = create<UseAuthenticationStoreType>()(
         name: "secret",
       },
     ),
-    {
-      store: "useAuthenticationStore",
-      enabled: import.meta.env.MODE === "development" ? true : false,
-    },
+    definedStore("useAuthenticationStore"),
   ),
 )
 
