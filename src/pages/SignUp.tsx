@@ -8,11 +8,14 @@ import { toast } from "react-toastify"
 type Props = {}
 
 function SignUp({}: Props) {
-  const { informationForm, onSubmitForm, onHandleChangeInformationForm } = useUserAuth()
+  const { informationForm, onSubmitForm, onHandleChangeInformationForm } =
+    useUserAuth()
   const { onUpdateIsOpen } = useGlobalLoading()
   const navigate = useNavigate()
 
-  const handleSubmitForm = async (...props: Parameters<typeof onSubmitForm>) => {
+  const handleSubmitForm = async (
+    ...props: Parameters<typeof onSubmitForm>
+  ) => {
     onUpdateIsOpen()
     const [data, errorMsg] = await onSubmitForm(props[0], props[1], "signUp")
 
@@ -30,7 +33,12 @@ function SignUp({}: Props) {
     onUpdateIsOpen()
   }
   return (
-    <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
+    <div
+      className={clsx(
+        "min-h-screen w-full relative",
+        "grid grid-flow-row grid-cols-12",
+      )}
+    >
       <div
         className={clsx(
           "col-span-full sm:col-span-3 lg:col-span-6",

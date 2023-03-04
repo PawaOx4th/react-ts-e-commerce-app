@@ -3,14 +3,15 @@ import FormTemplate from "components/FormTemplate"
 import { useGlobalLoading } from "hook/useGlobalLoading"
 import useUserAuth from "hook/useUserAuth"
 import { useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import useAuthenticationStore from "src/store/authentication/authentication.store"
 
 type SignInPropsType = {}
 
 function SignIn({}: SignInPropsType) {
-  const { onSubmitForm, informationForm, onHandleChangeInformationForm } = useUserAuth()
+  const { onSubmitForm, informationForm, onHandleChangeInformationForm } =
+    useUserAuth()
   const jwtToken = useAuthenticationStore((state) => state.jwt)
   const navigate = useNavigate()
   const { onUpdateIsOpen } = useGlobalLoading()
@@ -37,7 +38,12 @@ function SignIn({}: SignInPropsType) {
   }
 
   return (
-    <div className={clsx("min-h-screen w-full relative", "grid grid-flow-row grid-cols-12")}>
+    <div
+      className={clsx(
+        "min-h-screen w-full relative",
+        "grid grid-flow-row grid-cols-12",
+      )}
+    >
       <div
         className={clsx(
           "col-span-full sm:col-span-3 lg:col-span-6",
@@ -53,7 +59,9 @@ function SignIn({}: SignInPropsType) {
       <div className={clsx("col-span-full sm:col-span-9 lg:col-span-6")}>
         <FormTemplate
           buttonText='sign in'
-          onSubmit={(email: string, password: string) => handleSignIn(email, password, "signIn")}
+          onSubmit={(email: string, password: string) =>
+            handleSignIn(email, password, "signIn")
+          }
           email={informationForm.email}
           password={informationForm.password}
           onChange={(value, type) => {
