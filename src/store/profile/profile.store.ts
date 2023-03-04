@@ -1,3 +1,4 @@
+import { onGetProfileWithUserId } from "api/profile"
 import { definedStore } from "src/helpers"
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
@@ -7,6 +8,7 @@ type UseProfileStoreType = {
   user: ProfileType | null
   onUpdateUser: (user: ProfileType) => ProfileType
   onRemoveUser: () => void
+  onGetProfile: () => Promise<void>
 }
 
 const useProfileStore = create<UseProfileStoreType>()(
@@ -19,6 +21,15 @@ const useProfileStore = create<UseProfileStoreType>()(
       },
       onRemoveUser: () => {
         set({ user: null }, false, "onRemoveUser")
+      },
+      onGetProfile: async () => {
+        const [data, error] = await onGetProfileWithUserId("45")
+        if (error) {
+          // handle error
+        }
+        if (data) {
+          set({ user: data }, false, "onGetProfile")
+        }
       },
     }),
     definedStore("useProfileStore"),

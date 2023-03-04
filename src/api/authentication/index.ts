@@ -1,7 +1,8 @@
-import axios, { Axios, AxiosError, AxiosResponse } from "axios"
+import { AxiosResponse } from "axios"
 import client from "config/axiosConfig"
 import { InformationFormType } from "hook/useUserAuth"
-import { APIResponseErrorType, AxiosReturn } from "types/Api.type"
+import { onHandleErrorFromApi } from "src/helpers"
+import { AxiosReturn } from "types/Api.type"
 import { SignUpResponseType, SingInResponseType } from "./authentication.type"
 
 export interface SingUpParamType {
@@ -27,10 +28,7 @@ export async function onSignUp({
 
     return [response.data, null]
   } catch (error) {
-    if (axios.isAxiosError<APIResponseErrorType>(error)) {
-      return [null, error.response?.data?.error?.message ?? "Error"]
-    }
-    return [null, (error as Error).message]
+    return onHandleErrorFromApi(error)
   }
 }
 
@@ -46,9 +44,6 @@ export async function onSignIn({
 
     return [response.data, null]
   } catch (error) {
-    if (axios.isAxiosError<APIResponseErrorType>(error)) {
-      return [null, error.response?.data?.error?.message ?? "Error"]
-    }
-    return [null, (error as Error).message]
+    return onHandleErrorFromApi(error)
   }
 }
