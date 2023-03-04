@@ -28,7 +28,13 @@ function useUserAuth() {
     setInformationForm((prev) => ({ ...prev, [type]: value }))
   }
 
-  const { onSetJwt, onRemoveJwt } = useAuthenticationStore()
+  const { onSetJwt, onRemoveJwt } = useAuthenticationStore(
+    (state) => ({
+      onSetJwt: state.onSetJwt,
+      onRemoveJwt: state.onRemoveJwt,
+    }),
+    shallow,
+  )
   const { onUpdateUser, onRemoveUser } = useProfileStore(
     (state) => ({
       onUpdateUser: state.onUpdateUser,
