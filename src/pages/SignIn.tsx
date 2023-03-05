@@ -56,7 +56,13 @@ function SignIn({}: SignInPropsType) {
         <div className='bg_grid'></div>
         {/* <img src={ShoppingBg} alt='' className='aspect-square hidden lg:block' /> */}
       </div>
-      <div className={clsx("col-span-full sm:col-span-9 lg:col-span-6")}>
+
+      <div
+        className={clsx(
+          "col-span-full sm:col-span-9 lg:col-span-6",
+          "md:bg-sign-in-bg bg-cover",
+        )}
+      >
         <FormTemplate
           buttonText='sign in'
           onSubmit={(email: string, password: string) =>

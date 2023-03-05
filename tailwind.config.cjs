@@ -12,6 +12,9 @@ module.exports = {
           white: "#F8FAFC",
         },
       },
+      backgroundImage: {
+        "sign-in-bg": "url('/src/assets/signin-bg.svg')",
+      },
     },
   },
   plugins: [],
