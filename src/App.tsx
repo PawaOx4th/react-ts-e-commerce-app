@@ -9,11 +9,31 @@ import PleaseConfirmPage from "pages/PleaseConfirmPage"
 import SelfTest from "pages/SelfTest"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
+import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import useAuthenticationStore from "./store/authentication/authentication.store"
+import useProfileStore from "./store/profile/profile.store"
 
 function App() {
+  const userJwt = useAuthenticationStore((state) => state.jwt)
+  const onGetProfile = useProfileStore((state) => state.onGetProfile)
+
+  const onGetProfileWithJwt = async () => {
+    await onGetProfile()
+  }
+
+  useEffect(() => {
+    let isMounted = false
+    if (userJwt) {
+      !isMounted && onGetProfileWithJwt()
+    }
+    return () => {
+      isMounted = true
+    }
+  }, [userJwt])
+
   return (
     <GlobalLoadingProvider>
       <ToastContainer position={"bottom-right"} />
@@ -26,7 +46,11 @@ function App() {
         </Route>
         <Route path='sign-in' element={<SignIn />} caseSensitive />
         <Route path='sign-up' element={<SignUp />} caseSensitive />
-        <Route path='please-confirm' element={<PleaseConfirmPage />} caseSensitive />
+        <Route
+          path='please-confirm'
+          element={<PleaseConfirmPage />}
+          caseSensitive
+        />
         <Route path='test' element={<SelfTest />} caseSensitive />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
