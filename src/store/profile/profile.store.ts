@@ -2,6 +2,7 @@ import { onGetProfileWithUserId } from "api/profile"
 import { definedStore } from "src/helpers"
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
+import useAuthenticationStore from "../authentication/authentication.store"
 import { ProfileType } from "./type"
 
 type UseProfileStoreType = {
@@ -21,6 +22,7 @@ const useProfileStore = create<UseProfileStoreType>()(
       },
       onRemoveUser: () => {
         set({ user: null }, false, "onRemoveUser")
+        useAuthenticationStore.getState().onRemoveJwt()
       },
       onGetProfile: async () => {
         const [data, error] = await onGetProfileWithUserId("45")
