@@ -4,5 +4,6 @@
     "source.organizeImports": true,
     "source.fixAll": true
   },
-  "cSpell.words": ["toastify"]
+  "cSpell.words": ["toastify"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
