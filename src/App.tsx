@@ -9,7 +9,7 @@ import PleaseConfirmPage from "pages/PleaseConfirmPage"
 import SelfTest from "pages/SelfTest"
 import SignIn from "pages/SignIn"
 import SignUp from "pages/SignUp"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -20,9 +20,9 @@ function App() {
   const userJwt = useAuthenticationStore((state) => state.jwt)
   const onGetProfile = useProfileStore((state) => state.onGetProfile)
 
-  const onGetProfileWithJwt = async () => {
+  const onGetProfileWithJwt = useCallback(async () => {
     await onGetProfile()
-  }
+  }, [])
 
   useEffect(() => {
     let isMounted = false
