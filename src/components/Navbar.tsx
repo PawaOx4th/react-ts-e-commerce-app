@@ -6,14 +6,23 @@ import { HiShoppingBag } from "react-icons/hi"
 import { NavLink } from "react-router-dom"
 import { FULL_MENU_LIST } from "src/constraint/FULL_MENU_LIST"
 import useAuthenticationStore from "src/store/authentication/authentication.store"
+import useProfileStore from "src/store/profile/profile.store"
 import theme from "style/theme"
 
 type NavbarPropTypes = {}
 
 function Navbar({}: NavbarPropTypes) {
+  /**
+   *
+   * @description Get jwt token from store.
+   */
   const jwtToken = useAuthenticationStore((state) => state.jwt)
   const { onSignOut } = useUserAuth()
 
+  /**
+   *
+   * @description For crate menu list follow user authentication status.
+   */
   const menuList = useMemo(() => {
     if (jwtToken) {
       return FULL_MENU_LIST.filter(
@@ -21,6 +30,12 @@ function Navbar({}: NavbarPropTypes) {
       )
     } else return FULL_MENU_LIST
   }, [jwtToken])
+
+  /**
+   * NOTE
+   */
+  const user = useProfileStore((state) => state.user)
+  console.log("🔥 user :", user)
 
   return (
     <div
@@ -61,6 +76,7 @@ function Navbar({}: NavbarPropTypes) {
                 </li>
               )
             })}
+
           {jwtToken && (
             <li
               className={clsx(
@@ -78,6 +94,11 @@ function Navbar({}: NavbarPropTypes) {
               </button>
             </li>
           )}
+          <li className='capitalize font-medium select-none transition-all text-main-white '>
+            <div className={clsx("bg-main-secondary", "p-3", "rounded-full")}>
+              {user?.username.slice(0, 2).toUpperCase()}
+            </div>
+          </li>
         </ul>
       </div>
     </div>
