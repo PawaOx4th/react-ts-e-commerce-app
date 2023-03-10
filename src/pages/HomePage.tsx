@@ -1,7 +1,7 @@
-import { onGetProduct } from "api/products"
-import { ProductsType } from "api/products/product.type"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import useProductStore from "src/store/product/product.store"
 import styled from "styled-components"
+import { shallow } from "zustand/shallow"
 
 const ContainerHome = styled.div`
   width: 100%;
@@ -9,26 +9,30 @@ const ContainerHome = styled.div`
 `
 
 function HomePage() {
-  const [product, setProduct] = useState<ProductsType>()
+  const { products, onFetchProducts } = useProductStore(
+    (state) => ({
+      products: state.products,
+      onFetchProducts: state.onFetchProducts,
+    }),
+    shallow,
+  )
+
   useEffect(() => {
-    const abortController = new AbortController()
-    const fetchProduct = async () => {
-      const res = await onGetProduct()
-      res[0] && setProduct(res[0])
-    }
-
-    fetchProduct()
-
-    return () => {
-      abortController.abort()
-    }
+    onFetchProducts()
   }, [])
 
   return (
     <ContainerHome>
-      <pre>
-        <code>{JSON.stringify(product, null, 2)}</code>
-      </pre>
+      <ul>
+        {products?.map((item) => {
+          return (
+            <li key={item.id}>
+              {item.name}
+              <img src={item.img?.url} alt={item.name} loading='lazy' />
+            </li>
+          )
+        })}
+      </ul>
     </ContainerHome>
   )
 }

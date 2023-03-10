@@ -15,6 +15,16 @@ export type ProductDataType = {
   publishedAt?: string
   slug?: null
   img?: ProductImgType
+  categories?: CategoryType[]
+}
+
+export type CategoryType = {
+  id?: number
+  title?: string
+  desc?: string
+  createdAt?: string
+  updatedAt?: string
+  publishedAt?: string
 }
 
 export type ProductImgType = {
