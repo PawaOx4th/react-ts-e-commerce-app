@@ -1,13 +1,13 @@
 export interface APIResponseErrorType {
-  data?: null
-  error?: APIErrorType
+  data?: null;
+  error?: APIErrorType;
 }
 
 export interface APIErrorType {
-  status?: number
-  name?: string
-  message?: string
-  details?: object | null
+  status?: number;
+  name?: string;
+  message?: string;
+  details?: object | null;
 }
 
-export type AxiosReturn<T> = Promise<[T, null] | [null, string]>
+export type AxiosReturnType<T> = Promise<[T, null] | [null, string]>;

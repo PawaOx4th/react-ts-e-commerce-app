@@ -1,12 +1,10 @@
-import clsx from "clsx"
-import React from "react"
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import clsx from "clsx";
+import React from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-type Props = {}
-
-function PleaseConfirmPage({}: Props) {
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+function PleaseConfirmPage() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   return (
     <div className='relative'>
@@ -19,15 +17,29 @@ function PleaseConfirmPage({}: Props) {
       >
         <div className='bg_grid' />
       </div>
-      <div className={clsx("z-[2]", "w-full min-h-screen", "flex justify-center items-center")}>
-        <div className={clsx("p-6 ", "bg-main-white rounded-md", "w-[500px]", "text-center")}>
+      <div
+        className={clsx(
+          "z-[2]",
+          "w-full min-h-screen",
+          "flex justify-center items-center",
+        )}
+      >
+        <div
+          className={clsx(
+            "p-6 ",
+            "bg-main-white rounded-md",
+            "w-[500px]",
+            "text-center",
+          )}
+        >
           <p className={clsx("font-bold text-2xl ")}>Great !!!</p>
           <p className='mb-0'>
-            Your email address <strong>{searchParams.get("email")}</strong> appears to be valid.
-            Please check your inbox for a confirmation email with further instructions. Thank you🤟
-            !
+            Your email address <strong>{searchParams.get("email")}</strong>{" "}
+            appears to be valid. Please check your inbox for a confirmation
+            email with further instructions. Thank you🤟 !
           </p>
           <button
+            type='button'
             className={clsx(
               "font-bold",
               "bg-main-primary px-3 py-2 rounded-md",
@@ -37,7 +49,7 @@ function PleaseConfirmPage({}: Props) {
               "mt-5",
             )}
             onClick={() => {
-              navigate("/sign-in")
+              navigate("/sign-in");
             }}
           >
             Go to SignIn
@@ -45,7 +57,7 @@ function PleaseConfirmPage({}: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PleaseConfirmPage
+export default PleaseConfirmPage;

@@ -68,7 +68,10 @@ p {
     width: 100%;
     min-height: 100vh;
 
-    background-image: linear-gradient(rgba(255, 255, 255, 0.4) 0.1em, transparent 0.1em),
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.4) 0.1em,
+        transparent 0.1em
+      ),
       linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0.1em, transparent 0.1em);
     /* background-size: 7rem 7rem; */
 

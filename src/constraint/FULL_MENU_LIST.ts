@@ -1,8 +1,8 @@
 type FullMenuListType = {
-  name: string
-  path: string
-  private: boolean
-}
+  name: string;
+  path: string;
+  private: boolean;
+};
 
 export const FULL_MENU_LIST: Readonly<FullMenuListType[]> = [
   {
@@ -25,4 +25,4 @@ export const FULL_MENU_LIST: Readonly<FullMenuListType[]> = [
     path: "/sign-up",
     private: false,
   },
-]
+];

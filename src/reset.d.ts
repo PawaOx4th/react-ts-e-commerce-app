@@ -1,1 +1,2 @@
-import "@total-typescript/ts-reset"
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "@total-typescript/ts-reset";

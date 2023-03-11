@@ -1,17 +1,16 @@
-import { InformationFormType } from "hook/useUserAuth"
-import React, { useId } from "react"
-import styled from "styled-components"
-import { Input, Label } from "./atom"
-import clsx from "clsx"
+import clsx from "clsx";
+import { InformationFormType } from "hook/useUserAuth";
+import React, { useId } from "react";
+import { Input, Label } from "./atom";
 
-type FormTemplatePropTypes = {
-  title?: string
-  buttonText?: string
-  email: string
-  password: string
-  onChange: (value: string, type: keyof InformationFormType) => void
-  onSubmit: (email: string, password: string) => void
-}
+type FormTemplatePropType = {
+  title?: string;
+  buttonText?: string;
+  email: string;
+  password: string;
+  onChange: (_value: string, _type: keyof InformationFormType) => void;
+  onSubmit: (_email: string, _password: string) => void;
+};
 
 function FormTemplate({
   title,
@@ -20,9 +19,9 @@ function FormTemplate({
   password,
   onChange,
   buttonText,
-}: FormTemplatePropTypes) {
-  const emailId = useId()
-  const passwordId = useId()
+}: FormTemplatePropType) {
+  const emailId = useId();
+  const passwordId = useId();
 
   return (
     <div
@@ -32,15 +31,26 @@ function FormTemplate({
         "h-full w-full p-8 rounded-md",
       )}
     >
-      <div className={clsx("text-left", "w-full sm:w-[75%]   lg:w-8/12 xl:w-5/12")}>
-        <h1 className={clsx("font-semibold m-0 text-md")}>{title || "Hey, hello 👋"}</h1>
-        <small className='mt-5 block'>Enter the information you entered while sign in.</small>
+      <div
+        className={clsx("text-left", "w-full sm:w-[75%]   lg:w-8/12 xl:w-5/12")}
+      >
+        <h1 className={clsx("font-semibold m-0 text-md")}>
+          {title || "Hey, hello 👋"}
+        </h1>
+        <small className='mt-5 block'>
+          Enter the information you entered while sign in.
+        </small>
       </div>
       <form
-        className={clsx("flex", "flex-col", "gap-1", "w-full sm:w-[75%]  lg:w-8/12 xl:w-5/12")}
+        className={clsx(
+          "flex",
+          "flex-col",
+          "gap-1",
+          "w-full sm:w-[75%]  lg:w-8/12 xl:w-5/12",
+        )}
         onSubmit={(e) => {
-          e.preventDefault()
-          onSubmit(email, password)
+          e.preventDefault();
+          onSubmit(email, password);
         }}
       >
         <div className='block relative'>
@@ -51,9 +61,9 @@ function FormTemplate({
             required
             value={email}
             autoFocus
-            placeholder={"Email are Username"}
+            placeholder='Email are Username'
             onChange={(e) => {
-              onChange(e.target.value, "email")
+              onChange(e.target.value, "email");
             }}
             className={clsx(
               "peer",
@@ -84,9 +94,9 @@ function FormTemplate({
             id={passwordId}
             required
             value={password}
-            placeholder={"Password"}
+            placeholder='Password'
             onChange={(e) => {
-              onChange(e.target.value, "password")
+              onChange(e.target.value, "password");
             }}
             className={clsx(
               "peer",
@@ -120,13 +130,17 @@ function FormTemplate({
             "transition-all",
           )}
         >
-          <span className={clsx("text-white font-semibold tracking-wider uppercase")}>
+          <span
+            className={clsx(
+              "text-white font-semibold tracking-wider uppercase",
+            )}
+          >
             {buttonText || "submit"}
           </span>
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default FormTemplate
+export default FormTemplate;

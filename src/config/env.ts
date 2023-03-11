@@ -2,8 +2,8 @@ const env = {
   VITE_API_URL: "",
   VITE_WEB_NAME: "",
   MODE: "" as unknown,
-} as const
+} as const;
 
-export type ENV = typeof env
+export type ENVType = typeof env;
 
-export default env
+export default env;

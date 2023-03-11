@@ -1,12 +1,12 @@
-import { useEffect } from "react"
-import useProductStore from "src/store/product/product.store"
-import styled from "styled-components"
-import { shallow } from "zustand/shallow"
+import React, { useEffect } from "react";
+import useProductStore from "src/store/product/product.store";
+import styled from "styled-components";
+import { shallow } from "zustand/shallow";
 
 const ContainerHome = styled.div`
   width: 100%;
   /* min-height: calc(100vh - 50px); */
-`
+`;
 
 function HomePage() {
   const { products, onFetchProducts } = useProductStore(
@@ -15,26 +15,24 @@ function HomePage() {
       onFetchProducts: state.onFetchProducts,
     }),
     shallow,
-  )
+  );
 
   useEffect(() => {
-    onFetchProducts()
-  }, [])
+    onFetchProducts();
+  }, []);
 
   return (
     <ContainerHome>
       <ul>
-        {products?.map((item) => {
-          return (
-            <li key={item.id}>
-              {item.name}
-              <img src={item.img?.url} alt={item.name} loading='lazy' />
-            </li>
-          )
-        })}
+        {products?.map((item) => (
+          <li key={item.id}>
+            {item.name}
+            <img src={item.img?.url} alt={item.name} loading='lazy' />
+          </li>
+        ))}
       </ul>
     </ContainerHome>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

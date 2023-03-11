@@ -1,10 +1,10 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import App from "./App"
-import "./style/index.css"
-import { BrowserRouter } from "react-router-dom"
-import { ThemeProvider } from "styled-components"
-import theme from "style/theme"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import theme from "style/theme";
+import { ThemeProvider } from "styled-components";
+import App from "./App";
+import "./style/index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -14,4 +14,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
-)
+);
