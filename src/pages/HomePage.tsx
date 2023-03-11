@@ -27,7 +27,13 @@ function HomePage() {
         {products?.map((item) => (
           <li key={item.id}>
             {item.name}
-            <img src={item.img?.url} alt={item.name} loading='lazy' />
+            <img
+              src={item.img?.url}
+              alt={item.name}
+              loading='lazy'
+              width={300}
+              height={300}
+            />
           </li>
         ))}
       </ul>
