@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@pawaox4th/commit-cli': ^1.0.1
   '@total-typescript/ts-reset': ^0.3.7
   '@types/js-cookie': ^3.0.3
   '@types/react': ^18.0.28
@@ -34,6 +35,7 @@ specifiers:
   zustand: ^4.3.5
 
 dependencies:
+  '@pawaox4th/commit-cli': 1.0.1
   '@types/styled-components': 5.1.26
   axios: 1.3.4
   clsx: 1.2.1
@@ -291,6 +293,23 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+
+  /@clack/core/0.3.2:
+    resolution: {integrity: sha512-FZnsNynwGDIDktx6PEZK1EuCkFpY4ldEX6VYvfl0dqeoLPb9Jpw1xoUXaVcGR8ExmYNm1w2vdGdJkEUYD/2pqg==}
+    dependencies:
+      picocolors: 1.0.0
+      sisteransi: 1.0.5
+    dev: false
+
+  /@clack/prompts/0.6.3:
+    resolution: {integrity: sha512-AM+kFmAHawpUQv2q9+mcB6jLKxXGjgu/r2EQjEwujgpCdzrST6BJqYw00GRn56/L/Izw5U7ImoLmy00X/r80Pw==}
+    dependencies:
+      '@clack/core': 0.3.2
+      picocolors: 1.0.0
+      sisteransi: 1.0.5
+    dev: false
+    bundledDependencies:
+      - is-unicode-supported
 
   /@emotion/is-prop-valid/1.2.0:
     resolution: {integrity: sha512-3aDpDprjM0AwaxGE09bOPkNxHpBd+kA6jty3RnaEXdweX1DF1U3VQpPYb0g1IStAuK7SVQ1cy+bNBBKp4W3Fjg==}
@@ -664,6 +683,15 @@ packages:
       - rollup
       - supports-color
     dev: true
+
+  /@pawaox4th/commit-cli/1.0.1:
+    resolution: {integrity: sha512-F1pbFTS/P9K5DyyJqaMeckswx56JG7K1NFDXAgEv/fRA7vcrkqW3iecnpAnFgJyfmZYW1yShZOhUlzGu9lu8Vg==}
+    hasBin: true
+    dependencies:
+      '@clack/core': 0.3.2
+      '@clack/prompts': 0.6.3
+      prompt-sync: 4.2.0
+    dev: false
 
   /@pnpm/network.ca-file/1.0.2:
     resolution: {integrity: sha512-YcPQ8a0jwYU9bTdJDpXjMi7Brhkr1mXsXrUJvjqM2mQDgkRiz8jFaQGOdaLxgjtUfQgZhKy/O3cG/YwmgKaxLA==}
@@ -1084,6 +1112,11 @@ packages:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
     dependencies:
       string-width: 4.2.3
+    dev: false
+
+  /ansi-regex/4.1.1:
+    resolution: {integrity: sha512-ILlv4k/3f6vfQ4OoP2AGvirOktlQ98ZEL1k9FaQjxa3L1abBgbuTDAdPOpvbGncC0BTVQrl+OM8xZGK6tWXt7g==}
+    engines: {node: '>=6'}
     dev: false
 
   /ansi-regex/5.0.1:
@@ -3171,6 +3204,12 @@ packages:
       retry: 0.12.0
     dev: false
 
+  /prompt-sync/4.2.0:
+    resolution: {integrity: sha512-BuEzzc5zptP5LsgV5MZETjDaKSWfchl5U9Luiu8SKp7iZWD5tZalOxvNcZRwv+d2phNFr8xlbxmFNcRKfJOzJw==}
+    dependencies:
+      strip-ansi: 5.2.0
+    dev: false
+
   /prompts-ncu/2.5.1:
     resolution: {integrity: sha512-Hdd7GgV7b76Yh9FP9HL1D9xqtJCJdVPpiM2vDtuoc8W1KfweJe15gutFYmxkq83ViFaagFM8K0UcPCQ/tZq8bA==}
     engines: {node: '>= 6'}
@@ -3750,6 +3789,13 @@ packages:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
     dependencies:
       safe-buffer: 5.2.1
+    dev: false
+
+  /strip-ansi/5.2.0:
+    resolution: {integrity: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==}
+    engines: {node: '>=6'}
+    dependencies:
+      ansi-regex: 4.1.1
     dev: false
 
   /strip-ansi/6.0.1:
