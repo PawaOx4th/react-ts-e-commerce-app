@@ -1,13 +1,13 @@
-import clsx from "clsx"
-import React from "react"
-import HashLoader from "react-spinners/HashLoader"
+import clsx from "clsx";
+import React from "react";
+import HashLoader from "react-spinners/HashLoader";
 
 type GlobalLoadingPropsType = {
-  isOpen: boolean
-}
+  isOpen: boolean;
+};
 
 export function GlobalLoading({ isOpen = false }: GlobalLoadingPropsType) {
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
@@ -18,7 +18,7 @@ export function GlobalLoading({ isOpen = false }: GlobalLoadingPropsType) {
         "flex justify-center items-center",
       )}
     >
-      <HashLoader color='#41CBBF' size={"72px"} />
+      <HashLoader color='#41CBBF' size='72px' />
     </div>
-  )
+  );
 }

@@ -1,8 +1,9 @@
-import "styled-components"
-import theme, { ThemeType } from "style/theme"
+import { ThemeType } from "style/theme";
+import "styled-components";
 
-type CustomTheme = ThemeType
+type CustomThemeType = ThemeType;
 
 declare module "styled-components" {
-  export interface DefaultTheme extends CustomTheme {}
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  export interface DefaultTheme extends CustomThemeType {}
 }

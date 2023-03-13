@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "pages/*": ["./src/pages/*"],
@@ -28,7 +28,7 @@
       "types/*": ["./src/types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./.eslintrc.cjs"],
   "exclude": ["./auto-imports.d.ts"],
   "references": [
     {

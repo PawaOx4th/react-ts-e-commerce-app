@@ -1,41 +1,39 @@
-import clsx from "clsx"
-import FormTemplate from "components/FormTemplate"
-import { useGlobalLoading } from "hook/useGlobalLoading"
-import useUserAuth from "hook/useUserAuth"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
-import useAuthenticationStore from "src/store/authentication/authentication.store"
+import clsx from "clsx";
+import FormTemplate from "components/FormTemplate";
+import { useGlobalLoading } from "hook/useGlobalLoading";
+import useUserAuth from "hook/useUserAuth";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import useAuthenticationStore from "src/store/authentication/authentication.store";
 
-type SignInPropsType = {}
-
-function SignIn({}: SignInPropsType) {
+function SignIn() {
   const { onSubmitForm, informationForm, onHandleChangeInformationForm } =
-    useUserAuth()
-  const jwtToken = useAuthenticationStore((state) => state.jwt)
-  const navigate = useNavigate()
-  const { onUpdateIsOpen } = useGlobalLoading()
+    useUserAuth();
+  const jwtToken = useAuthenticationStore((state) => state.jwt);
+  const navigate = useNavigate();
+  const { onUpdateIsOpen } = useGlobalLoading();
 
   useEffect(() => {
     if (jwtToken) {
-      navigate("/")
+      navigate("/");
     }
-    return () => {}
-  }, [jwtToken])
+    return () => {};
+  }, [jwtToken]);
 
   const handleSignIn = async (...params: Parameters<typeof onSubmitForm>) => {
-    onUpdateIsOpen()
-    const [data, errorMsg] = await onSubmitForm(params[0], params[1], "signIn")
+    onUpdateIsOpen();
+    const [data, errorMsg] = await onSubmitForm(params[0], params[1], "signIn");
 
     if (errorMsg) {
-      toast.error(errorMsg)
+      toast.error(errorMsg);
     }
     if (data) {
-      toast.success("Sign in successfully")
-      navigate("/")
+      toast.success("Sign in successfully");
+      navigate("/");
     }
-    onUpdateIsOpen()
-  }
+    onUpdateIsOpen();
+  };
 
   return (
     <div
@@ -53,7 +51,7 @@ function SignIn({}: SignInPropsType) {
           "flex items-center justify-center",
         )}
       >
-        <div className='bg_grid'></div>
+        <div className='bg_grid' />
         {/* <img src={ShoppingBg} alt='' className='aspect-square hidden lg:block' /> */}
       </div>
 
@@ -71,12 +69,12 @@ function SignIn({}: SignInPropsType) {
           email={informationForm.email}
           password={informationForm.password}
           onChange={(value, type) => {
-            onHandleChangeInformationForm(value, type)
+            onHandleChangeInformationForm(value, type);
           }}
         />
       </div>
     </div>
-  )
+  );
 }
 
-export default SignIn
+export default SignIn;

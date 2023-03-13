@@ -1,37 +1,37 @@
-import clsx from "clsx"
-import FormTemplate from "components/FormTemplate"
-import { useGlobalLoading } from "hook/useGlobalLoading"
-import useUserAuth from "hook/useUserAuth"
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
+import clsx from "clsx";
+import FormTemplate from "components/FormTemplate";
+import { useGlobalLoading } from "hook/useGlobalLoading";
+import useUserAuth from "hook/useUserAuth";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-type Props = {}
-
-function SignUp({}: Props) {
+function SignUp() {
   const { informationForm, onSubmitForm, onHandleChangeInformationForm } =
-    useUserAuth()
-  const { onUpdateIsOpen } = useGlobalLoading()
-  const navigate = useNavigate()
+    useUserAuth();
+  const { onUpdateIsOpen } = useGlobalLoading();
+  const navigate = useNavigate();
 
   const handleSubmitForm = async (
     ...props: Parameters<typeof onSubmitForm>
   ) => {
-    onUpdateIsOpen()
-    const [data, errorMsg] = await onSubmitForm(props[0], props[1], "signUp")
+    onUpdateIsOpen();
+    // eslint-disable-next-line react/prop-types
+    const [data, errorMsg] = await onSubmitForm(props[0], props[1], "signUp");
 
     if (errorMsg) {
       toast.error(errorMsg, {
         autoClose: false,
-      })
-      return
+      });
+      return;
     }
 
     if (data) {
-      const dummy = data?.user?.email
-      navigate(`/please-confirm?email=${dummy}`)
+      const dummy = data?.user?.email;
+      navigate(`/please-confirm?email=${dummy}`);
     }
-    onUpdateIsOpen()
-  }
+    onUpdateIsOpen();
+  };
   return (
     <div
       className={clsx(
@@ -48,23 +48,23 @@ function SignUp({}: Props) {
           "flex items-center justify-center",
         )}
       >
-        <div className='bg_grid'></div>
+        <div className='bg_grid' />
       </div>
       <div className={clsx("col-span-full sm:col-span-9 lg:col-span-6")}>
         <FormTemplate
           buttonText='sign up'
           onSubmit={(email: string, password: string) => {
-            handleSubmitForm(email, password, "signUp")
+            handleSubmitForm(email, password, "signUp");
           }}
           email={informationForm.email}
           password={informationForm.password}
           onChange={(value, type) => {
-            onHandleChangeInformationForm(value, type)
+            onHandleChangeInformationForm(value, type);
           }}
         />
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

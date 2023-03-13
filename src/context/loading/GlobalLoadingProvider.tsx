@@ -1,25 +1,29 @@
-import { GlobalLoading } from "components/molecules/GlobalLoading"
-import React, { PropsWithChildren, useMemo, useState } from "react"
-import { GlobalLoadingContext, GlobalLoadingContextType } from "./globalLoadingContext"
+import { GlobalLoading } from "components/molecules/GlobalLoading";
+import React, { PropsWithChildren, useMemo, useState } from "react";
+import {
+  GlobalLoadingContext,
+  GlobalLoadingContextType,
+} from "./globalLoadingContext";
 
-type GlobalLoadingProvider = {}
+type GlobalLoadingProviderPropsType = {};
 
 export default function GlobalLoadingProvider({
   children,
-}: PropsWithChildren<GlobalLoadingProvider>) {
-  const [isOpen, setIsOpen] = useState(false)
+}: PropsWithChildren<GlobalLoadingProviderPropsType>) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  const value = useMemo<GlobalLoadingContextType>(() => {
-    return {
-      isOpen: isOpen,
+  const value = useMemo<GlobalLoadingContextType>(
+    () => ({
+      isOpen,
       onUpdateIsOpen: () => setIsOpen((prevIsOpen) => !prevIsOpen),
-    }
-  }, [isOpen])
+    }),
+    [isOpen],
+  );
 
   return (
     <GlobalLoadingContext.Provider value={value}>
       <GlobalLoading isOpen={value.isOpen} />
       {children}
     </GlobalLoadingContext.Provider>
-  )
+  );
 }

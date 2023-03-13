@@ -12,8 +12,8 @@ const theme = {
     lg: 1600, // most laptops and desktops
     xl: 2048, // 2k and up
   },
-} as const
+} as const;
 
-export type ThemeType = typeof theme
+export type ThemeType = typeof theme;
 
-export default theme
+export default theme;
