@@ -41,7 +41,7 @@ function Navbar() {
     <div
       className={clsx(
         "flex sticky top-0",
-        "w-full min-h-[4rem]",
+        "w-full h-[4rem]",
         "bg-main-primary",
         "items-center justify-between flex-wrap py-4 px-8",
       )}
@@ -49,9 +49,12 @@ function Navbar() {
       <div className='flex grow basis-12'>
         <HiShoppingBag color={theme.color.white} size='2rem' />
       </div>
-      <div className='grow-[5rem]'>
+      <div className='md:grow-[5rem]'>
         <ul
-          className={clsx("hidden md:flex", "justify-end items-center gap-8")}
+          className={clsx(
+            "absolute left-0  w-screen md:w-auto bg-main-primary md:bg-transparent   top-[4rem] z-auto  md:inset-0 md:relative block md:flex",
+            "justify-end items-center gap-8",
+          )}
         >
           {menuList &&
             menuList.map((item) => (
