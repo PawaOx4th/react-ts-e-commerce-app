@@ -83,13 +83,13 @@ function Navbar() {
         {/* top-[3.5rem] */}
         <ul
           className={clsx(
-            isOpen ? "top-[3.5rem]" : "-top-[100vh]",
+            isOpen ? "top-[3.5rem] opacity-100" : "-top-[100vh] opacity-50",
             "absolute left-0 z-auto  h-screen w-screen  bg-main-primary md:relative  md:inset-0  md:h-full md:w-auto md:bg-transparent",
             "items-center gap-4 md:gap-8",
             "px-8 py-4 md:p-0",
             "flex flex-col md:flex-row",
             "justify-start md:justify-end",
-            "transition-all",
+            "transition-all duration-300 ease-in-out",
           )}
         >
           {menuList &&
