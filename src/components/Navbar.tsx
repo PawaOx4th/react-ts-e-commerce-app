@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import useUserAuth from "hook/useUserAuth";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoSignOut } from "react-icons/go";
 import { HiShoppingBag } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import { useMedia } from "react-use";
 import { FULL_MENU_LIST } from "src/constraint/FULL_MENU_LIST";
 import useAuthenticationStore from "src/store/authentication/authentication.store";
 import useProfileStore from "src/store/profile/profile.store";
@@ -41,9 +42,15 @@ function Navbar() {
 
   /**
    *
-   * @description toggle navbar menu.
+   * @description Toggle navbar menu.
    */
   const [isOpen, setIsOpen] = useState(false);
+  const isDeskTopScreen = useMedia("(min-width: 768px)");
+  useEffect(() => {
+    if (isDeskTopScreen) {
+      setIsOpen(false);
+    }
+  }, [isDeskTopScreen]);
 
   return (
     <div
