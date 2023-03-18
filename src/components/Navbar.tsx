@@ -1,8 +1,10 @@
 import clsx from "clsx";
 import useUserAuth from "hook/useUserAuth";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { GoSignOut } from "react-icons/go";
 import { HiShoppingBag } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { FULL_MENU_LIST } from "src/constraint/FULL_MENU_LIST";
 import useAuthenticationStore from "src/store/authentication/authentication.store";
@@ -35,25 +37,52 @@ function Navbar() {
   /**
    * NOTE
    */
-  const user = useProfileStore((state) => state.user);
+  const user = useProfileStore((state) => state.user ?? null);
+
+  /**
+   *
+   * @description toggle navbar menu.
+   */
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div
       className={clsx(
-        "flex sticky top-0",
-        "w-full h-[4rem]",
+        "sticky top-0 flex",
+        "min-h-[4rem] w-full",
         "bg-main-primary",
-        "items-center justify-between flex-wrap py-4 px-8",
+        "flex-wrap items-center justify-between py-4 px-8",
       )}
     >
-      <div className='flex grow basis-12'>
+      <div className='z-10 flex grow basis-8 items-stretch justify-between '>
         <HiShoppingBag color={theme.color.white} size='2rem' />
+        <div className={clsx("block md:hidden")}>
+          {isOpen ? (
+            <IoMdClose
+              className={clsx("h-full text-3xl text-white")}
+              onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
+            />
+          ) : (
+            <GiHamburgerMenu
+              onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
+              className={clsx("h-[100%] ")}
+              size={24}
+              color='#fff'
+            />
+          )}
+        </div>
       </div>
-      <div className='md:grow-[5rem]'>
+      <div className='md:grow-[5]'>
+        {/* top-[3.5rem] */}
         <ul
           className={clsx(
-            "absolute left-0  w-screen md:w-auto bg-main-primary md:bg-transparent   top-[4rem] z-auto  md:inset-0 md:relative block md:flex",
-            "justify-end items-center gap-8",
+            isOpen ? "top-[3.5rem]" : "-top-[100vh]",
+            "absolute left-0 z-auto  h-screen w-screen  bg-main-primary md:relative  md:inset-0  md:h-full md:w-auto md:bg-transparent",
+            "items-center gap-4 md:gap-8",
+            "px-8 py-4 md:p-0",
+            "flex flex-col md:flex-row",
+            "justify-start md:justify-end",
+            "transition-all",
           )}
         >
           {menuList &&
@@ -61,16 +90,18 @@ function Navbar() {
               <li
                 key={item.name}
                 className={clsx(
-                  "capitalize font-medium",
+                  "font-medium capitalize",
                   " select-none transition-all ",
+                  "flex h-12 w-full md:h-auto md:w-auto",
                 )}
               >
                 <NavLink
                   to={`${item.path}`}
                   className={clsx(
-                    "no-underline text-main-white",
-                    "hover:text-main-gray hover:bg-main-secondary/50 hover:rounded py-2 px-6",
-                    "[&.active]:bg-main-secondary [&.active]:text-main-white [&.active]:rounded",
+                    "text-main-white no-underline",
+                    "h-full w-full py-2 px-6 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray md:w-auto",
+                    "[&.active]:rounded [&.active]:bg-main-secondary [&.active]:text-main-white",
+                    "flex items-center",
                   )}
                 >
                   {item.name}
@@ -81,14 +112,14 @@ function Navbar() {
           {jwtToken && (
             <li
               className={clsx(
-                "capitalize font-medium select-none transition-all text-main-white ",
+                "select-none font-medium capitalize text-main-white transition-all ",
               )}
             >
               <button
                 type='button'
                 className={clsx(
                   "flex items-center gap-2",
-                  "hover:text-main-gray hover:bg-main-secondary/50 hover:rounded px-6 py-2 ",
+                  "px-6 py-2 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray ",
                 )}
                 onClick={() => onSignOut()}
               >
@@ -96,7 +127,7 @@ function Navbar() {
               </button>
             </li>
           )}
-          <li className='capitalize font-medium select-none transition-all text-main-white '>
+          <li className='select-none font-medium capitalize text-main-white transition-all '>
             <div className={clsx("bg-main-secondary", "p-3", "rounded-full")}>
               {user?.username.slice(0, 2).toUpperCase()}
             </div>
