@@ -45,6 +45,9 @@ function Navbar() {
    * @description Toggle navbar menu.
    */
   const [isOpen, setIsOpen] = useState(false);
+  const handleUpdateIsOpen = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
   const isDeskTopScreen = useMedia("(min-width: 768px)");
   useEffect(() => {
     if (isDeskTopScreen) {
@@ -67,11 +70,11 @@ function Navbar() {
           {isOpen ? (
             <IoMdClose
               className={clsx("h-full text-3xl text-white")}
-              onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
+              onClick={() => handleUpdateIsOpen()}
             />
           ) : (
             <GiHamburgerMenu
-              onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
+              onClick={() => handleUpdateIsOpen()}
               className={clsx("h-[100%] ")}
               size={24}
               color='#fff'
@@ -89,7 +92,7 @@ function Navbar() {
             "px-8 py-4 md:p-0",
             "flex flex-col md:flex-row",
             "justify-start md:justify-end",
-            "transition-all duration-300 ease-in-out",
+            "transition-all duration-300 ease-in-out md:opacity-100",
           )}
         >
           {menuList &&
@@ -110,6 +113,7 @@ function Navbar() {
                     "[&.active]:rounded [&.active]:bg-main-secondary [&.active]:text-main-white",
                     "flex items-center",
                   )}
+                  onClick={() => handleUpdateIsOpen()}
                 >
                   {item.name}
                 </NavLink>
