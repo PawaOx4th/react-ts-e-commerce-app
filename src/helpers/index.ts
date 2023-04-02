@@ -15,3 +15,10 @@ export function onHandleErrorFromApi(error: unknown): [null, string] {
   }
   return [null, (error as Error).message];
 }
+
+export function formatCurrency(value: number) {
+  return new Intl.NumberFormat("th-TH", {
+    style: "currency",
+    currency: "THB",
+  }).format(value);
+}
