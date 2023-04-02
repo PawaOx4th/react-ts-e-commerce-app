@@ -19,12 +19,12 @@ function HomePage() {
 
   return (
     <div className={clsx("container mx-auto", "p-4")}>
-      <div className={clsx("grid grid-flow-row grid-cols-12 gap-4")}>
+      <div className={clsx("@container grid grid-flow-row grid-cols-12 gap-4")}>
         {products?.map((product) => (
           <div
             key={product.id}
             className={clsx(
-              "col-span-6  md:col-span-4  xl:col-span-2",
+              "col-span-6  @md:col-span-4 @3xl:col-span-2",
               "border-gray-400-500 border",
               "rounded-b-lg",
               "flex flex-col",
