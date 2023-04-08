@@ -23,17 +23,21 @@ function HomePage() {
   }, [products]);
   const [keyword, setKeyword] = useState("");
 
-  const onFilterProducts = (product: ProductDataType, compareString: string) =>
-    product.name!.toLowerCase().includes(compareString.toLowerCase().trim());
+  const onCompareByProductName = (
+    product: ProductDataType,
+    compareString: string,
+  ) => product.name!.toLowerCase().includes(compareString.toLowerCase().trim());
+
+  const onFilterProduct = (param: string) => (product: ProductDataType) =>
+    onCompareByProductName(product, param);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!keywordRef.current) return;
 
     const keywordValue = keywordRef.current.value;
-    const filteredProducts = products?.filter((product) =>
-      onFilterProducts(product, keywordValue),
-    );
+    const filteredProducts = products?.filter(onFilterProduct(keywordValue));
+
     setProductList(filteredProducts ?? null);
     if (filteredProducts?.length === 0) setKeyword(keywordValue);
   };
