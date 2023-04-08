@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import React, { useEffect } from "react";
-import { formatCurrency } from "src/helpers";
+import ProductCard from "components/molecules/ProductCard";
+import React, { useEffect, useMemo, useState } from "react";
 import useProductStore from "src/store/product/product.store";
 import { shallow } from "zustand/shallow";
 
@@ -16,67 +16,49 @@ function HomePage() {
   useEffect(() => {
     onFetchProducts();
   }, []);
+  const [keyword, setKeyword] = useState("");
+
+  const productsFiltered = useMemo(() => {
+    if (!keyword) return products;
+
+    return products?.filter((product) =>
+      product.name!.toLowerCase().includes(keyword.toLowerCase()),
+    );
+  }, [keyword, products]);
 
   return (
     <div className={clsx("container mx-auto", "p-4")}>
-      <div className={clsx("@container grid grid-flow-row grid-cols-12 gap-4")}>
-        {products?.map((product) => (
-          <div
-            key={product.id}
-            className={clsx(
-              "col-span-6  @md:col-span-4 @3xl:col-span-2",
-              "border-gray-400-500 border",
-              "rounded-b-lg",
-              "flex flex-col",
-            )}
-          >
+      <div>
+        <input
+          type='text'
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+      </div>
+      <div className={clsx("grid grid-flow-row grid-cols-12 gap-4 @container")}>
+        {productsFiltered && productsFiltered.length > 0 ? (
+          productsFiltered?.map((product) => (
             <div
               className={clsx(
-                "h-[200px] w-full",
-                "bg-gray-200",
-                "overflow-hidden",
+                "col-span-6  @md:col-span-4  @4xl:col-span-3 @6xl:col-span-2",
               )}
             >
-              <img
-                src={product.img?.url}
-                alt=''
-                className={clsx(
-                  "h-full w-full object-contain",
-                  "hover:scale-110",
-                  "transition-all",
-                )}
+              <ProductCard
+                key={product.id}
+                image={product.img?.url}
+                name={product.name}
+                stock={product.stock ?? 0}
+                price={product.price}
               />
             </div>
-            <div
-              className={clsx(
-                "p-2",
-                "mt-4",
-                "flex flex-col",
-                "justify-between",
-              )}
-            >
-              <div className='flex flex-col'>
-                <span
-                  className={clsx("text-md font-medium", "text-main-secondary")}
-                >
-                  {product.name}
-                </span>
-                <span className={clsx("text-xs", "text-gray-500")}>
-                  in stock : {product.stock}
-                </span>
-              </div>
-              <span
-                className={clsx(
-                  "text-sm font-medium",
-                  "mt-4",
-                  "text-main-secondary",
-                )}
-              >
-                {product.price && formatCurrency(product.price)}
-              </span>
-            </div>
+          ))
+        ) : (
+          <div className={clsx("col-span-full", "text-center", "py-10")}>
+            <span className={clsx("text-2xl", "text-gray-300")}>
+              Product is not matched.
+            </span>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

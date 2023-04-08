@@ -58,10 +58,10 @@ function Navbar() {
   return (
     <div
       className={clsx(
-        "sticky top-0 flex",
+        "sticky top-0 z-10 flex",
         "min-h-[4rem] w-full",
         "bg-main-primary",
-        "flex-wrap items-center justify-between py-4 px-8",
+        "flex-wrap items-center justify-between px-8 py-4",
       )}
     >
       <div className='z-10 flex grow basis-8 items-stretch justify-between '>
@@ -109,7 +109,7 @@ function Navbar() {
                   to={`${item.path}`}
                   className={clsx(
                     "text-main-white no-underline",
-                    "h-full w-full py-2 px-6 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray md:w-auto",
+                    "h-full w-full px-6 py-2 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray md:w-auto",
                     "[&.active]:rounded [&.active]:bg-main-secondary [&.active]:text-main-white",
                     "flex items-center",
                   )}
