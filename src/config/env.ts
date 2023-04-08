@@ -1,9 +1,9 @@
-const env = {
-  VITE_API_URL: "",
-  VITE_WEB_NAME: "",
-  MODE: "" as unknown,
-} as const;
+import { z } from "zod";
 
-export type ENVType = typeof env;
+const envSchema = z.object({
+  VITE_API_URL: z.string(),
+  VITE_WEB_NAME: z.string(),
+  MODE: z.string(),
+});
 
-export default env;
+export type ENVType = z.infer<typeof envSchema>;

@@ -16,6 +16,8 @@ function ProductCard({ image, name, stock, price }: ProductCardPropsType) {
         "border-gray-400-500 border",
         "rounded-b-lg",
         "flex flex-col",
+        "h-full",
+        "w-full",
       )}
     >
       <div
