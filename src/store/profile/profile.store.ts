@@ -26,9 +26,6 @@ const useProfileStore = create<UseProfileStoreType>()(
       },
       onGetProfile: async () => {
         const [data, error] = await onGetUserProfile();
-        if (error) {
-          // handle error
-        }
         if (data) {
           set({ user: data }, false, "onGetProfile");
         }
