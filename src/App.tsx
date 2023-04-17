@@ -13,15 +13,25 @@ import React, { useCallback, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { shallow } from "zustand/shallow";
 import useAuthenticationStore from "./store/authentication/authentication.store";
 import useProfileStore from "./store/profile/profile.store";
 
 function App() {
   const userJwt = useAuthenticationStore((state) => state.jwt);
-  const onGetProfile = useProfileStore((state) => state.onGetProfile);
+  const { onGetProfile, onRemoveUser } = useProfileStore(
+    (state) => ({
+      onGetProfile: state.onGetProfile,
+      onRemoveUser: state.onRemoveUser,
+    }),
+    shallow,
+  );
 
   const onGetProfileWithJwt = useCallback(async () => {
-    await onGetProfile();
+    const [, errorMsg] = await onGetProfile();
+    if (errorMsg) {
+      onRemoveUser();
+    }
   }, []);
 
   useEffect(() => {
