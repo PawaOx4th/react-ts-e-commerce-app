@@ -1,0 +1,3 @@
+Added file test2.txt
+
+This file was added to address issue #9.
