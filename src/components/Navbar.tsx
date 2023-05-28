@@ -96,29 +96,35 @@ function Navbar() {
           )}
         >
           {menuList &&
-            menuList.map((item) => (
-              <li
-                key={item.name}
-                className={clsx(
-                  "font-medium capitalize",
-                  " select-none transition-all ",
-                  "flex h-12 w-full md:h-auto md:w-auto",
-                )}
-              >
-                <NavLink
-                  to={`${item.path}`}
+            menuList
+              // If the user is logged in, show all the menu.
+              // Otherwise, only show the public menu.
+              .filter((item) => !item.private || jwtToken)
+
+              .filter((item) => !item.private || jwtToken)
+              .map((item) => (
+                <li
+                  key={item.name}
                   className={clsx(
-                    "text-main-white no-underline",
-                    "h-full w-full px-6 py-2 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray md:w-auto",
-                    "[&.active]:rounded [&.active]:bg-main-secondary [&.active]:text-main-white",
-                    "flex items-center",
+                    "font-medium capitalize",
+                    " select-none transition-all ",
+                    "flex h-12 w-full md:h-auto md:w-auto",
                   )}
-                  onClick={() => handleUpdateIsOpen()}
                 >
-                  {item.name}
-                </NavLink>
-              </li>
-            ))}
+                  <NavLink
+                    to={`${item.path}`}
+                    className={clsx(
+                      "text-main-white no-underline",
+                      "h-full w-full px-6 py-2 hover:rounded hover:bg-main-secondary/50 hover:text-main-gray md:w-auto",
+                      "[&.active]:rounded [&.active]:bg-main-secondary [&.active]:text-main-white",
+                      "flex items-center",
+                    )}
+                    onClick={() => handleUpdateIsOpen()}
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
 
           {jwtToken && (
             <li

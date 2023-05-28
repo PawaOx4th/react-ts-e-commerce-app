@@ -25,4 +25,9 @@ export const FULL_MENU_LIST: Readonly<FullMenuListType[]> = [
     path: "/sign-up",
     private: false,
   },
+  {
+    name: "cart",
+    path: "/cart",
+    private: true,
+  },
 ];
